@@ -9,7 +9,7 @@ cube(`CasesDeathsByCounty`, {
   joins: {
     Counties: {
       relationship: `belongsTo`,
-      sql: `${CasesDeathsByFips}.fips = ${Counties.fips}`
+      sql: `${CasesDeathsByCounty}.fips = ${Counties.fips}`
     },
   },
   

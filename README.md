@@ -12,3 +12,19 @@ docker run -p 4000:4000 -p 13306:13306 \
 ```
 
 host.docker.internal
+
+
+http://localhost:4000/cubejs-api/graphql
+
+{
+  load {
+    counties {
+      state
+    }
+    casesDeathsByCounty {
+      week
+      deaths
+      cases
+    }
+  }
+}
