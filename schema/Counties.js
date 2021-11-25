@@ -8,25 +8,26 @@ cube(`Counties`, {
   
   
   measures: {
+    
     count: {
-      type: `count`,
-      drillMembers: [name]
+      type: `count`
     },
 
     population: {
       type: `sum`,
-      sql: 'population'
+      sql: `population`
     },
 
     male: {
-      type: `sum`,
-      sql: 'male'
+      type: `max`,
+      sql: `male`
     },
 
     female: {
-      type: `sum`,
-      sql: 'female'
+      type: `max`,
+      sql: `female`
     }
+
   },
   
   dimensions: {
@@ -37,20 +38,21 @@ cube(`Counties`, {
       primaryKey: true
     },
 
-    state: {
+    state_name: {
       sql: `state`,
       type: `string`
     },
     
-    name: {
+    county_name: {
       sql: `county`,
       type: `string`
     },
 
-    code: {
+    state_code: {
       sql: `state_code`,
       type: `string`
     }
+
   },
   
   dataSource: `default`

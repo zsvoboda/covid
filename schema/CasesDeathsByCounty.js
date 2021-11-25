@@ -21,13 +21,29 @@ cube(`CasesDeathsByCounty`, {
 
     cases: {
       type: `max`,
-      sql: 'cases'
+      sql: `cases`
     },
 
     deaths: {
       type: `max`,
-      sql: 'deaths'
+      sql: `deaths`
+    },
+
+    population: {
+      type: `sum`,
+      sql: `${Counties}.population`
+    },
+
+    male: {
+      type: `max`,
+      sql: `${Counties}.male`
+    },
+
+    female: {
+      type: `max`,
+      sql: `${Counties}.female`
     }
+
   },
   
   dimensions: {
@@ -57,6 +73,21 @@ cube(`CasesDeathsByCounty`, {
       sql: `extract(YEAR from "date")||'/W'||LPAD(extract(WEEK from "date")::text,2,'0')`,
       type: `string`
     },
+    
+    state_name: {
+      sql: `${Counties}.state`,
+      type: `string`
+    },
+    
+    county_name: {
+      sql: `${Counties}.county`,
+      type: `string`
+    },
+
+    state_code: {
+      sql: `${Counties}.state_code`,
+      type: `string`
+    }
 
   },
   
