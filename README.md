@@ -9,6 +9,18 @@ docker run -p 4000:4000 -p 13306:13306 \
   -v ${PWD}:/cube/conf \
   -e CUBEJS_DEV_MODE=true \
   cubejs/cube
+
+select  county, state, population, sum(population) over(partition by state), sum(population) over()
+  	from county;
+  	
+  select fips, date, cases, deaths, first_value(cases) over(partition by fips order by date desc), 
+  		first_value(deaths) over(partition by fips order by date desc)
+  	from cases_deaths_by_county cdbc order by fips, date; 
+  	
+  select fips, date, cases as cases_to_date, deaths as deaths_to_date, cases - lag(cases,1) over(partition by fips order by date) as cases_increment, 
+  		deaths - lag(deaths,1) over(partition by fips order by date) as deaths_increment
+  	from cases_deaths_by_county cdbc order by fips, date;
+
 ```
 
 host.docker.internal
