@@ -1,0 +1,2 @@
+# covid
+Cube.js covid 
