@@ -1,6 +1,4 @@
-# covid
-Cube.js covid 
-
+# Cube.js covid playground
 
 
 ```
