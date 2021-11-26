@@ -38,7 +38,15 @@ cube(`ACovidDaily`, {
       sql: `covid_cases_increment`,
       type: `sum`,
       drillMembers: [stateName, countyName, covidDate]
+    },
+
+    covidCasesIncrementPer100k: {
+      sql: `100000*${covidCasesIncrement}/326289971`,
+      type: `number`,
+      drillMembers: [stateName, countyName, covidDate]
     }
+
+    
 
   },
   

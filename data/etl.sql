@@ -199,6 +199,21 @@ create view a_covid_daily as
 		join os_state_dim osd on osd.state_id = ocd.state_id;
 
 --select distinct county_, state_population, state_male_population, state_female_population from a_covid_daily order by 1;
+	
+/*
+select distinct covid_date, 100.0 * sum(ocdf.covid_deaths_increment) over(partition by covid_date) / (select sum(county_population) from os_county_dim ocd) as perct
+	from os_covid_daily_fact ocdf
+	join os_county_dim ocd on ocd.county_id = ocdf.county_id
+	join os_covid_fact ocf on ocf.county_id = ocd.county_id
+	order by 1 desc;
+	
+select distinct covid_date, 100.0 * sum(ocdf.covid_cases_increment) over(partition by covid_date) / (select sum(county_population) from os_county_dim ocd) as perct
+	from os_covid_daily_fact ocdf
+	join os_county_dim ocd on ocd.county_id = ocdf.county_id
+	join os_covid_fact ocf on ocf.county_id = ocd.county_id
+	order by 1 desc;	
+*/
+
 
 
 
