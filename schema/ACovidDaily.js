@@ -16,17 +16,30 @@ cube(`ACovidDaily`, {
       drillMembers: [stateName, countyName, covidDate]
     },
     
-    covidDeathsTotal: {
-      sql: `covid_deaths_total`,
+    covidDeathsToDate: {
+      sql: `covid_deaths_to_date`,
+      type: `max`,
+      drillMembers: [stateName, countyName, covidDate]
+    },
+    
+    covidCasesToDate: {
+      sql: `covid_cases_to_date`,
+      type: `max`,
+      drillMembers: [stateName, countyName, covidDate]
+    },
+
+    covidDeathsIncrement: {
+      sql: `covid_deaths_increment`,
       type: `sum`,
       drillMembers: [stateName, countyName, covidDate]
     },
     
-    covidCasesTotal: {
-      sql: `covid_cases_total`,
+    covidCasesIncrement: {
+      sql: `covid_cases_increment`,
       type: `sum`,
       drillMembers: [stateName, countyName, covidDate]
     }
+
   },
   
   dimensions: {

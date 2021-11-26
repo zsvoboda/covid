@@ -26,7 +26,40 @@ cube(`ACovidTotals`, {
       sql: `covid_cases_total`,
       type: `sum`,
       drillMembers: [countyName, stateName]
+    },
+
+    countyPopulation: {
+      sql: `county_population`,
+      type: `sum`,
+      drillMembers: [countyName, stateName]
+    },
+
+    countyMalePopulation: {
+      sql: `county_male_population`,
+      type: `sum`,
+      drillMembers: [countyName, stateName]
+    },
+
+    countyFemalePopulation: {
+      sql: `county_female_population`,
+      type: `sum`,
+      drillMembers: [countyName, stateName]
+    },
+
+    deathsPerCapita: {
+      sql: `100.0 * ${covidDeathsTotal}/nullif(${countyPopulation},0)`,
+      type: `number`,
+      format: `percent`,
+      drillMembers: [countyName, stateName]
+    },
+
+    casesPerCapita: {
+      sql: `100.0 * ${covidCasesTotal}/nullif(${countyPopulation},0)`,
+      type: `number`,
+      format: `percent`,
+      drillMembers: [countyName, stateName]
     }
+
   },
   
   dimensions: {

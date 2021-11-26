@@ -103,29 +103,53 @@ create table os_covid_daily_fact (
 -- 69120	tinian	northern mariana islands
 -- 78010	st. croix	virgin islands
 -- 2997	bristol bay plus lake and peninsula	alaska
+truncate os_covid_daily_fact;
 insert into os_covid_daily_fact(covid_date, county_id, covid_deaths_to_date, covid_cases_to_date, 
 						   covid_deaths_increment, covid_cases_increment) 
-	select date, fips, deaths, cases, deaths - lag(deaths,1) over(partition by fips order by date), 
-		   cases - lag(cases,1) over(partition by fips order by date) 
+	select date, fips, deaths, cases, deaths - coalesce(lag(deaths,1) over(partition by fips order by date),0), 
+		   cases - coalesce(lag(cases,1) over(partition by fips order by date),0) 
 		from covid where fips in (select county_id from os_county_dim);
+	
+create index os_covid_daily_fact_county_id_idx on os_covid_daily_fact(county_id);
+create index os_covid_daily_fact_date_idx on os_covid_daily_fact(covid_date);
 	
 
 --select county_id, covid_date, covid_cases_to_date, covid_cases_increment
 --from os_covid_daily_fact
 --order by 1,2;
 	
+--select a1.cid, a1.c, a2.c 
+--	from a1
+--	join a2 on a2.cid = a1.cid
+--	where a1.c <> a2.c;
+	
+	
+--select sum(covid_cases_increment), sum(covid_deaths_increment)
+--	from os_covid_daily_fact ocdf;
+
+--select sum(covid_cases), sum(covid_deaths)
+--	from os_covid_fact;
+
+--select covid_date, covid_cases_to_date, covid_cases_increment 
+--	from os_covid_daily_fact ocdf 
+--	where county_id = 1073
+--	order by 1;
+	
 drop table if exists os_covid_fact;	
 create table os_covid_fact (
 	covid_id integer generated always as identity primary key,
 	county_id integer references os_county_dim(county_id),
 	covid_deaths integer,
-	covid_cases integer
+	covid_cases integer	
 );
 
+create index os_covid_fact_county_id_idx on os_covid_fact(county_id);
+
+truncate os_covid_fact;
 insert into os_covid_fact (county_id, covid_deaths, covid_cases) 
-	select county_id, max(covid_deaths_to_date), max(covid_cases_to_date)
-		from os_covid_daily_fact
-		group by 1;
+	select county_id, covid_deaths_to_date, covid_cases_to_date
+		from os_covid_daily_fact o1
+		where covid_date = (select max(covid_date) from os_covid_daily_fact o2 where o2.county_id = o1.county_id);
 	
 --select * from os_covid_fact ocf;
 	
@@ -140,7 +164,10 @@ create view a_covid_totals as
 		join os_county_dim ocd on ocd.county_id = ocf.county_id 
 		join os_state_dim osd on osd.state_id = ocd.state_id;
 
---select * from a_covid_totals; 
+--select state_code, 100.0 * sum(covid_cases_total) / max(state_population), 100.0 * sum(covid_deaths_total) / max(state_population)  from a_covid_totals group by 1;
+--select county_fips, 100.0 * covid_cases_total / county_population, 100.0 * covid_deaths_total / county_population 
+--	from a_covid_totals act
+--	where county_fips = '8025';
 	
 --drop view if exists a_covid_daily;
 create view a_covid_daily as
