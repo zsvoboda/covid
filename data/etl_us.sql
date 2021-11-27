@@ -14,7 +14,7 @@ create foreign table public.covid_staging
     cases text,
     deaths text
 )
-server fdw_files options 
+server covid_source_data options 
 (
     program 'curl -s https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv || exit $(( $? == 23 ? 0 : $? ))',
     format 'csv',
