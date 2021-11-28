@@ -10,7 +10,7 @@ cube(`States`, {
     Counties: {
       relationship: `hasMany`,
       sql: `${States}.state_id = ${Counties}.state_id`,
-    },
+    }
   },
   
   measures: {

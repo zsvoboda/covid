@@ -397,7 +397,7 @@ create table os_demography (
 	city_average_age_female float
 );
 
-TBD: Load the obyvatele.2021.csv to the is_obyvatele;
+--TBD: Load the obyvatele.2021.csv to the is_obyvatele; 
 
 insert into os_demography (
 	city_id, city_population, city_population_male, city_population_female, 
@@ -413,12 +413,12 @@ create table os_covid_event (
 	covid_event_type char(1) check (covid_event_type='I' or covid_event_type='R' or covid_event_type='D'),
 	covid_event_person_age smallint,
 	covid_event_person_gender char(1) check (covid_event_person_gender='M' or covid_event_person_gender='F'),
-	covid_event_district_id char(6) references os_district(district_id)
+	district_id char(6) references os_district(district_id)
 );
 
 insert into os_covid_event 
 	(covid_event_date, covid_event_type, covid_event_person_age, 
-	 covid_event_person_gender, covid_event_district_id) 
+	 covid_event_person_gender, district_id) 
 	select 
 		datum, 'I', vek::integer, 
 		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
@@ -427,7 +427,7 @@ insert into os_covid_event
 	
 insert into os_covid_event 
 	(covid_event_date, covid_event_type, covid_event_person_age, 
-	 covid_event_person_gender, covid_event_district_id) 
+	 covid_event_person_gender, district_id) 
 	select 
 		datum, 'R', vek::integer, 
 		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
@@ -436,7 +436,7 @@ insert into os_covid_event
 	
 insert into os_covid_event 
 	(covid_event_date, covid_event_type, covid_event_person_age, 
-	 covid_event_person_gender, covid_event_district_id) 
+	 covid_event_person_gender, district_id) 
 	select 
 		datum, 'D', vek::integer, 
 		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
@@ -531,4 +531,7 @@ select *
 	
 select city_id, city_name from os_city oc where city_id not in (select city_id from os_demography od);
 select city_id from os_demography oc where city_id not in (select city_id from os_city od);
+
+	
+select sum(city_population) from os_demography od 
 */

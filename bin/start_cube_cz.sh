@@ -4,9 +4,9 @@ export BIN_DIR="`dirname \"$0\"`"
 export COVID_HOME=$(cd ${BIN_DIR}/..;pwd)
 
 docker run -d -p 3000:3000 -p 4000:4000 -p 3306:3306 \
-  --name cube \
+  --name cube_covid_cz \
   -e CUBEJS_DB_HOST=host.docker.internal \
-  -e CUBEJS_DB_NAME=covid \
+  -e CUBEJS_DB_NAME=covid_cz \
   -e CUBEJS_DB_USER=demouser \
   -e CUBEJS_DB_PASS=demopass \
   -e CUBEJS_DB_TYPE=postgres \
