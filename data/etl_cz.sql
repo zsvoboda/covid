@@ -392,7 +392,6 @@ insert into os_city (city_id, district_id, city_name, city_latitude, city_longit
 drop table if exists os_covid_event;
 create table os_covid_event (
 	covid_event_id integer generated always as identity primary key,
-	country_id char(3) default 'CZ' references os_country(country_id),
 	covid_event_date date,
 	covid_event_type char(1) check (covid_event_type='I' or covid_event_type='R' or covid_event_type='D'),
 	covid_event_person_age smallint,
