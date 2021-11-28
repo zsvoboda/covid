@@ -397,6 +397,7 @@ create table os_demography (
 	city_average_age_female float
 );
 
+TBD: Load the obyvatele.2021.csv to the is_obyvatele;
 
 insert into os_demography (
 	city_id, city_population, city_population_male, city_population_female, 
