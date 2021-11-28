@@ -386,8 +386,24 @@ create table os_city (
 insert into os_city (city_id, district_id, city_name, city_latitude, city_longitude)
 	select distinct obec_kod, okres_kod, obec, latitude, longitude from mv_mista ;
 
-*/
+drop table if exists os_demography;
+create table os_demography (
+	city_id char(6) primary key references os_city(city_id),
+	city_population integer,
+	city_population_male integer,
+	city_population_female integer,
+	city_average_age float,
+	city_average_age_male float,
+	city_average_age_female float
+);
 
+
+insert into os_demography (
+	city_id, city_population, city_population_male, city_population_female, 
+	city_average_age, city_average_age_male, city_average_age_female)
+	select distinct obec_kod2, pocet_obyvatel, pocet_muzi, pocet_zeny, vek_prumer, vek_prumer_zeny, vek_prumer_zeny from is_obyvatele;
+	
+*/
 
 drop table if exists os_covid_event;
 create table os_covid_event (
@@ -511,5 +527,7 @@ select count(covid_event_id)
 select * 
 	from mv_covid_hospitalizace mch
 	order by datum desc;
-
+	
+select city_id, city_name from os_city oc where city_id not in (select city_id from os_demography od);
+select city_id from os_demography oc where city_id not in (select city_id from os_city od);
 */

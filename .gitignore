@@ -1,6 +1,7 @@
 # Project specific
 
 .cubestore
+.DS_Store
 
 # Logs
 logs
