@@ -6,7 +6,8 @@ create extension file_fdw;
 --drop server covid_source_data foreign data wrapper file_fdw;
 create server covid_source_data foreign data wrapper file_fdw;
 
--- SOURADNICE
+/*
+-- Geografie
 
 drop foreign table if exists public.is_mista;
 create foreign table public.is_mista
@@ -31,8 +32,10 @@ server covid_source_data options
 drop materialized view if exists mv_mista;
 create materialized view mv_mista as
  select obec, obec_kod, okres, okres_kod, kraj, kraj_kod, psc, latitude, longitude from public.is_mista;
+ 
+ */
 
--- OBCE
+-- COVID obce
 
 drop foreign table if exists public.is_mista_covid;
 create foreign table public.is_mista_covid
@@ -80,7 +83,7 @@ create materialized view mv_mista_covid as
 	nove_pripady_7_dni::integer,
 	nove_pripady_14_dni::integer from public.is_mista_covid;
 
--- KRAJ OKRES NAKAZENI VYLECENI UMRTI
+-- COVID kraj okres nakazeni vyleceni umrti
 
 drop foreign table if exists public.is_mista_covid_kumul;
 create foreign table public.is_mista_covid_kumul
@@ -111,7 +114,7 @@ create materialized view mv_mista_covid_kumul as
 	kumulativni_pocet_vylecenych::integer,
 	kumulativni_pocet_umrti::integer from public.is_mista_covid_kumul;
 
--- ORP
+-- COVID orp (obce s rozsirenou pusobnosti)
 
 drop foreign table if exists public.is_mista_covid_orp;
 create foreign table public.is_mista_covid_orp
@@ -155,7 +158,7 @@ create materialized view mv_mista_covid_orp as
 	nove_hosp_7::integer,
 	testy_7::integer from public.is_mista_covid_orp;
 
--- HOSPITALIZACE
+-- COVID hospitalizace
 
 drop foreign table if exists public.is_covid_hospitalizace;
 create foreign table public.is_covid_hospitalizace
@@ -207,7 +210,7 @@ create materialized view mv_covid_hospitalizace as
  from public.is_covid_hospitalizace;
 
 
--- NAKAZENI VYLECENI UMRTI TESTY
+-- COVID nakazeni vyleceni umrti testy
 
 
 drop foreign table if exists public.is_covid;
@@ -248,7 +251,7 @@ create materialized view mv_covid as
 	prirustkovy_pocet_provedenych_ag_testu::integer
  from public.is_covid;
 
--- NAKAZENI OSOBY
+-- COVID nakazeni osoby
 
 drop foreign table if exists public.is_mista_covid_nakazeni;
 create foreign table public.is_mista_covid_nakazeni
@@ -282,7 +285,7 @@ create materialized view mv_mista_covid_nakazeni as
 	nakaza_zeme_csu_kod,
 	reportovano_khs::integer from public.is_mista_covid_nakazeni;
 
--- VYLECENI OSOBY
+-- COVID vyleceni osoby
 
 drop foreign table if exists public.is_mista_covid_vyleceni;
 create foreign table public.is_mista_covid_vyleceni
@@ -310,7 +313,7 @@ create materialized view mv_mista_covid_vyleceni as
 	kraj_nuts_kod,
 	okres_lau_kod from public.is_mista_covid_vyleceni;
 
--- UMRTI OSOBY
+-- COVID umrti osoby
 
 drop foreign table if exists public.is_mista_covid_umrti;
 create foreign table public.is_mista_covid_umrti
@@ -338,8 +341,176 @@ create materialized view mv_mista_covid_umrti as
 	kraj_nuts_kod,
 	okres_lau_kod from public.is_mista_covid_umrti;
 
+-- MODEL
+
+/*
+-- Geografie
+
+drop table if exists os_country;
+create table os_country(
+	country_id char(3) primary key,
+	country_name varchar(50)
+);
+
+insert into public.os_country (country_id, country_name) values('CZ', 'Česká republika');
+
+drop table if exists os_county;
+create table os_county (
+	county_id char(5) primary key, 
+	country_id char(3) default 'CZ' references os_country(country_id),
+	county_name varchar(50)
+);
+
+insert into os_county(county_id, county_name)
+	select distinct kraj_kod, kraj from mv_mista;
+
+drop table if exists os_district;
+create table os_district (
+	district_id char(6) primary key, 
+	county_id char(5) references os_county(county_id),
+	district_name varchar(50)
+);
+
+insert into os_district (district_id, county_id, district_name)
+	select distinct okres_kod, kraj_kod, okres from mv_mista ;
+
+drop table if exists os_city;
+create table os_city (
+	city_id char(6) primary key, 
+	district_id char(6) references os_district(district_id),
+	city_name varchar(50),
+	city_latitude varchar(50),
+	city_longitude varchar(50)
+);
+
+insert into os_city (city_id, district_id, city_name, city_latitude, city_longitude)
+	select distinct obec_kod, okres_kod, obec, latitude, longitude from mv_mista ;
+
+*/
+
+
+drop table if exists os_covid_event;
+create table os_covid_event (
+	covid_event_id integer generated always as identity primary key,
+	country_id char(3) default 'CZ' references os_country(country_id),
+	covid_event_date date,
+	covid_event_type char(1) check (covid_event_type='I' or covid_event_type='R' or covid_event_type='D'),
+	covid_event_person_age smallint,
+	covid_event_person_gender char(1) check (covid_event_person_gender='M' or covid_event_person_gender='F'),
+	covid_event_district_id char(6) references os_district(district_id)
+);
+
+insert into os_covid_event 
+	(covid_event_date, covid_event_type, covid_event_person_age, 
+	 covid_event_person_gender, covid_event_district_id) 
+	select 
+		datum, 'I', vek::integer, 
+		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
+		okres_lau_kod
+		from mv_mista_covid_nakazeni;
+	
+insert into os_covid_event 
+	(covid_event_date, covid_event_type, covid_event_person_age, 
+	 covid_event_person_gender, covid_event_district_id) 
+	select 
+		datum, 'R', vek::integer, 
+		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
+		okres_lau_kod
+		from mv_mista_covid_vyleceni ;
+	
+insert into os_covid_event 
+	(covid_event_date, covid_event_type, covid_event_person_age, 
+	 covid_event_person_gender, covid_event_district_id) 
+	select 
+		datum, 'D', vek::integer, 
+		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
+		okres_lau_kod
+		from mv_mista_covid_umrti ;
+	
+drop table if exists os_covid_testing;
+create table os_covid_testing (
+	covid_testing_id integer generated always as identity primary key,
+	country_id char(3) default 'CZ' references os_country(country_id),
+	covid_testing_date date,
+	covid_testing_type_ag integer,
+	covid_testing_type_pcr integer
+);
+
+insert into os_covid_testing (covid_testing_date, covid_testing_type_ag, covid_testing_type_pcr) 
+	select datum, prirustkovy_pocet_provedenych_ag_testu, prirustkovy_pocet_provedenych_testu from public.mv_covid; 
 
 
 
+drop table if exists os_covid_hospitalisation;
+create table os_covid_hospitalisation (
+	covid_hospitalisation_id integer generated always as identity primary key,
+	country_id char(3) default 'CZ' references os_country(country_id),
+	covid_hospitalisation_date date,
+	covid_hospitalisation_admissions integer,
+	covid_hospitalisation_current integer,
+	covid_hospitalisation_no_symptoms integer,
+	covid_hospitalisation_light_symptoms integer,
+	covid_hospitalisation_medium_symptoms integer,
+	covid_hospitalisation_severe_symptoms integer,
+	covid_hospitalisation_intensive_care integer,
+	covid_hospitalisation_oxygen integer,
+	covid_hospitalisation_hfno integer,
+	covid_hospitalisation_ventilation integer,
+	covid_hospitalisation_ecmo integer,
+	covid_hospitalisation_ecmo_ventilation integer,
+	covid_hospitalisation_deaths integer
+);
+
+insert into os_covid_hospitalisation (
+	covid_hospitalisation_date, covid_hospitalisation_admissions, covid_hospitalisation_current, 
+	covid_hospitalisation_no_symptoms, covid_hospitalisation_light_symptoms, 
+	covid_hospitalisation_medium_symptoms, covid_hospitalisation_severe_symptoms, 
+	covid_hospitalisation_intensive_care, covid_hospitalisation_oxygen, 
+	covid_hospitalisation_hfno, covid_hospitalisation_ventilation, 
+	covid_hospitalisation_ecmo, covid_hospitalisation_ecmo_ventilation, 
+	covid_hospitalisation_deaths) 
+	select 
+		datum, 
+		pacient_prvni_zaznam,pocet_hosp,stav_bez_priznaku, stav_lehky, stav_stredni, stav_tezky, jip,
+		kyslik,hfno,upv,ecmo,tezky_upv_ecmo,umrti 
+		from mv_covid_hospitalizace;
 
 
+/*
+select * from mv_mista mm;
+select * from mv_mista_covid mmc where orp_kod='7111';
+select * from os_county;
+select * from os_district;
+	
+select covid_hospitalisation_date, covid_hospitalisation_current,
+covid_hospitalisation_no_symptoms + covid_hospitalisation_light_symptoms + 
+covid_hospitalisation_medium_symptoms + covid_hospitalisation_severe_symptoms 
+	from os_covid_hospitalisation och
+	order by covid_hospitalisation_date desc;
+
+
+select covid_event_date, count(covid_event_id) 
+	from os_covid_event oce 
+	where covid_event_type = 'I'
+	group by 1
+	order by 1 desc;
+
+select datum, prirustkovy_pocet_provedenych_testu, prirustkovy_pocet_provedenych_ag_testu 
+	from mv_covid mc
+	order by datum desc; 
+
+select covid_event_date, count(covid_event_id) 
+	from os_covid_event oce 
+	where covid_event_type = 'D'
+	group by 1
+	order by 1 desc;
+
+select count(covid_event_id) 
+	from os_covid_event oce 
+	where covid_event_type = 'D';
+
+select * 
+	from mv_covid_hospitalizace mch
+	order by datum desc;
+
+*/
