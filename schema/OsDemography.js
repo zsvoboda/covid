@@ -11,30 +11,30 @@ cube(`Demographies`, {
   },
   
   measures: {
-    
-    cityPopulation: {
+
+    population: {
       sql: `city_population`,
       type: `sum`
     },
 
-    cityPopulationMale: {
+    populationMale: {
       sql: `city_population_male`,
       type: `sum`
     },
 
-    cityPopulationFemale: {
+    populationFemale: {
       sql: `city_population_female`,
       type: `sum`
     },
 
-    cityPopulationMalePercentage: {
-      sql: `100.0 * ${cityPopulationMale}/nullif(${cityPopulation}, 0)`,
+    populationMalePercentage: {
+      sql: `100.0 * ${populationMale}/nullif(${population}, 0)`,
       type: `number`,
       format: `percent`
     },
 
     cityPopulationFemalePercentage: {
-      sql: `100.0 * ${cityPopulationFemale}/nullif(${cityPopulation}, 0)`,
+      sql: `100.0 * ${populationFemale}/nullif(${population}, 0)`,
       type: `number`,
       format: `percent`
     }

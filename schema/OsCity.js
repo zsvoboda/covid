@@ -18,6 +18,21 @@ cube(`Cities`, {
     count: {
       type: `count`,
       drillMembers: [cityName]
+    },
+
+    cityPopulation: {
+      sql: `${demographyPopulation}`,
+      type: `sum`
+    },
+
+    cityMalePopulation: {
+      sql: `${demographyMalePopulation}`,
+      type: `sum`
+    },
+
+    cityFemalePopulation: {
+      sql: `${demographyFemalePopulation}`,
+      type: `sum`
     }
 
   },
@@ -43,6 +58,24 @@ cube(`Cities`, {
     cityLongitude: {
       sql: `city_longitude`,
       type: `string`
+    },
+
+    demographyPopulation: {
+      sql: `${Demographies.population}`,
+      type: `number`,
+      subQuery: true
+    },
+
+    demographyMalePopulation: {
+      sql: `${Demographies.populationMale}`,
+      type: `number`,
+      subQuery: true
+    },
+
+    demographyFemalePopulation: {
+      sql: `${Demographies.populationFemale}`,
+      type: `number`,
+      subQuery: true
     }
     
   },
