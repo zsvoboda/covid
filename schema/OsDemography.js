@@ -11,10 +11,7 @@ cube(`Demographies`, {
   },
   
   measures: {
-    count: {
-      type: `count`
-    },
-
+    
     cityPopulation: {
       sql: `city_population`,
       type: `sum`

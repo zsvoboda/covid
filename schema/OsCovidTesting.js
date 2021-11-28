@@ -11,18 +11,14 @@ cube(`Testings`, {
   },
   
   measures: {
-    count: {
-      type: `count`,
-      drillMembers: [covidTestingDate]
-    },
 
-    antigenTests: {
+    antigen: {
       sql: `covid_testing_type_ag`,
       type: `sum`,
       drillMembers: [covidTestingDate]
     },
 
-    pcrTests: {
+    pcr: {
       sql: `covid_testing_type_pcr`,
       type: `sum`,
       drillMembers: [covidTestingDate]
@@ -33,7 +29,7 @@ cube(`Testings`, {
   dimensions: {
     covidTestingId: {
       sql: `covid_testing_id`,
-      type: `string`,
+      type: `number`,
       primaryKey: true
     },
     

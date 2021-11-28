@@ -12,11 +12,6 @@ cube(`Hospitalisations`, {
   
   measures: {
     
-    count: {
-      type: `count`,
-      drillMembers: [covidHospitalisationDate]
-    },
-
     newlyHospitalised: {
       sql: `covid_hospitalisation_admissions`,
       type: `sum`,
