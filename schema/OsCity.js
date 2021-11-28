@@ -14,10 +14,12 @@ cube(`Cities`, {
   },
   
   measures: {
+    
     count: {
       type: `count`,
       drillMembers: [cityName]
     }
+
   },
   
   dimensions: {

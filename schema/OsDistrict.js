@@ -26,10 +26,12 @@ cube(`Districts`, {
   },
   
   measures: {
+    
     count: {
       type: `count`,
       drillMembers: [districtName]
     }
+
   },
   
   dimensions: {
