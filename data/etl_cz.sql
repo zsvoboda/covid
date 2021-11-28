@@ -361,6 +361,8 @@ create table os_county (
 	county_name varchar(50)
 );
 
+create index os_county_country_id_idx on os_county(country_id);
+
 insert into os_county(county_id, county_name)
 	select distinct kraj_kod, kraj from mv_mista;
 
@@ -370,6 +372,8 @@ create table os_district (
 	county_id char(5) references os_county(county_id),
 	district_name varchar(50)
 );
+
+create index os_district_county_id_idx on os_district(county_id);
 
 insert into os_district (district_id, county_id, district_name)
 	select distinct okres_kod, kraj_kod, okres from mv_mista ;
@@ -382,6 +386,8 @@ create table os_city (
 	city_latitude varchar(50),
 	city_longitude varchar(50)
 );
+
+create index os_city_district_id_idx on os_city(district_id);
 
 insert into os_city (city_id, district_id, city_name, city_latitude, city_longitude)
 	select distinct obec_kod, okres_kod, obec, latitude, longitude from mv_mista ;
@@ -413,8 +419,13 @@ create table os_covid_event (
 	covid_event_type char(1) check (covid_event_type='I' or covid_event_type='R' or covid_event_type='D'),
 	covid_event_person_age smallint,
 	covid_event_person_gender char(1) check (covid_event_person_gender='M' or covid_event_person_gender='F'),
-	district_id char(6) references os_district(district_id)
+	district_id char(6) references os_district(district_id),
+	covid_event_cnt smallint default 1
 );
+
+create index os_covid_event_type_idx on os_covid_event(covid_event_type);
+create index os_covid_event_date_idx on os_covid_event(covid_event_date);
+create index os_covid_event_district_id_idx on os_covid_event(district_id);
 
 insert into os_covid_event 
 	(covid_event_date, covid_event_type, covid_event_person_age, 
@@ -452,9 +463,10 @@ create table os_covid_testing (
 	covid_testing_type_pcr integer
 );
 
+create index os_covid_testing_country_id_idx on os_covid_testing(country_id);
+
 insert into os_covid_testing (covid_testing_date, covid_testing_type_ag, covid_testing_type_pcr) 
 	select datum, prirustkovy_pocet_provedenych_ag_testu, prirustkovy_pocet_provedenych_testu from public.mv_covid; 
-
 
 
 drop table if exists os_covid_hospitalisation;
@@ -477,6 +489,8 @@ create table os_covid_hospitalisation (
 	covid_hospitalisation_deaths integer
 );
 
+create index os_covid_hospitalisation_country_id_idx on os_covid_hospitalisation(country_id);
+
 insert into os_covid_hospitalisation (
 	covid_hospitalisation_date, covid_hospitalisation_admissions, covid_hospitalisation_current, 
 	covid_hospitalisation_no_symptoms, covid_hospitalisation_light_symptoms, 
@@ -490,6 +504,28 @@ insert into os_covid_hospitalisation (
 		pacient_prvni_zaznam,pocet_hosp,stav_bez_priznaku, stav_lehky, stav_stredni, stav_tezky, jip,
 		kyslik,hfno,upv,ecmo,tezky_upv_ecmo,umrti 
 		from mv_covid_hospitalizace;
+	
+--VIEWS
+	
+drop view if exists v_covid_by_district;
+create view v_covid_by_district as
+	select distinct od.district_id, 
+		sum(oce.covid_event_cnt) filter (where oce.covid_event_type in ('I')) as district_infections, 
+		sum(oce.covid_event_cnt) filter (where oce.covid_event_type in ('R')) as district_recoveries,
+		sum(oce.covid_event_cnt) filter (where oce.covid_event_type in ('D')) as district_deaths
+		from os_district od 
+		join os_covid_event oce on oce.district_id = od.district_id 
+		group by 1;
+
+drop view if exists v_demography_by_district;
+create view v_demography_by_district as
+	select distinct od.district_id, 
+		sum(ode.city_population) as district_population
+		from os_district od 
+		join os_city oc on oc.district_id = od.district_id 
+		join os_demography ode on ode.city_id = oc.city_id 
+		group by 1;	
+
 
 
 /*
@@ -534,4 +570,17 @@ select city_id from os_demography oc where city_id not in (select city_id from o
 
 	
 select sum(city_population) from os_demography od 
+	
+select count(*) from os_covid_event oce;	
+		
+select * from v_demography_by_district;
+select * from v_covid_by_district;
+
+select 
+	oc.county_name, 100.0 * sum(district_deaths) / sum(district_infections)
+	from os_county oc 
+		join os_district od on od.county_id = oc.county_id 
+		join v_demography_by_district de on de.district_id = od.district_id 
+		join v_covid_by_district c on c.district_id = od.district_id
+	group by 1;
 */
