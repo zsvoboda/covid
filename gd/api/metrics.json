@@ -1,0 +1,143 @@
+{
+    "data": [
+        {
+            "attributes": {
+                "title": "Infections",
+                "description": "",
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.covid_event.covideventcnt}) \n    WHERE {label/covid_event.covid_event_type} = \"I\""
+                }
+            },
+            "id": "infections",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/infections"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Deaths",
+                "description": "",
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.covid_event.covideventcnt}) \n    WHERE {label/covid_event.covid_event_type} = \"D\""
+                }
+            },
+            "id": "deaths",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/deaths"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Recoveries",
+                "description": "",
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.covid_event.covideventcnt}) \n    WHERE {label/covid_event.covid_event_type} = \"R\""
+                }
+            },
+            "id": "recoveries",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/recoveries"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Population",
+                "description": "",
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.demography.citypopulation})"
+                }
+            },
+            "id": "population",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/population"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Infections (%)",
+                "description": "",
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/infections} / (SELECT {metric/population} BY {label/district.district_id} ALL OTHER )"
+                }
+            },
+            "id": "infections_2",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/infections_2"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Deaths (%)",
+                "description": "",
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/deaths} / (SELECT {metric/population} BY {label/district.district_id} ALL OTHER )"
+                }
+            },
+            "id": "deaths_2",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/deaths_2"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Recoveries (%)",
+                "description": "",
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/recoveries} / (SELECT {metric/population} BY {label/district.district_id} ALL OTHER )"
+                }
+            },
+            "id": "recoveries_2",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/recoveries_2"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Recovery Rate (%)",
+                "description": "",
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/recoveries} / {metric/infections}"
+                }
+            },
+            "id": "recovery_rate",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/recovery_rate"
+            },
+            "type": "metric"
+        },
+        {
+            "attributes": {
+                "title": "Death Rate (%)",
+                "description": "",
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/deaths} / {metric/infections}"
+                }
+            },
+            "id": "death_rate",
+            "links": {
+                "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/death_rate"
+            },
+            "type": "metric"
+        }
+    ],
+    "links": {
+        "self": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/?page=0&size=20",
+        "next": "http://localhost:3000/api/entities/workspaces/covid.cz/metrics/?page=1&size=20"
+    }
+}

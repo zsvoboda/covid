@@ -42,8 +42,8 @@ cube(`Demographies`, {
   },
   
   dimensions: {
-    cityId: {
-      sql: `city_id`,
+    demographyId: {
+      sql: `demography_id`,
       type: `string`,
       primaryKey: true
     }

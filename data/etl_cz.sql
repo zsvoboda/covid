@@ -392,7 +392,8 @@ insert into os_city (city_id, district_id, city_name, city_latitude, city_longit
 
 drop table if exists os_demography;
 create table os_demography (
-	city_id char(6) primary key references os_city(city_id),
+	demography_id char(6) primary key,
+	city_id char(6)  references os_city(city_id),
 	city_population integer,
 	city_population_male integer,
 	city_population_female integer,
@@ -401,14 +402,15 @@ create table os_demography (
 	city_average_age_female float
 );
 
---TBD: Load the obyvatele.2021.csv to the is_obyvatele; 
+create index os_demography_city_id_idx on os_demography(city_id);
 
-insert into os_demography (
+insert into os_demography (demography_id,
 	city_id, city_population, city_population_male, city_population_female, 
 	city_average_age, city_average_age_male, city_average_age_female)
-	select distinct obec_kod2, pocet_obyvatel, pocet_muzi, pocet_zeny, vek_prumer, vek_prumer_zeny, vek_prumer_zeny from is_obyvatele;
+	select distinct obec_kod2, obec_kod2, pocet_obyvatel, pocet_muzi, pocet_zeny, vek_prumer, vek_prumer_zeny, vek_prumer_zeny from is_obyvatele;
 	
 */
+
 
 drop view if exists v_covid_by_district;
 drop view if exists v_demography_by_district;
@@ -420,6 +422,7 @@ create table os_covid_event (
 	covid_event_date date,
 	covid_event_type char(1) check (covid_event_type='I' or covid_event_type='R' or covid_event_type='D'),
 	covid_event_person_age smallint,
+	covid_event_person_age_padded char(3),
 	covid_event_person_gender char(1) check (covid_event_person_gender='M' or covid_event_person_gender='F'),
 	district_id char(6) references os_district(district_id),
 	covid_event_cnt smallint default 1
@@ -430,28 +433,28 @@ create index os_covid_event_date_idx on os_covid_event(covid_event_date);
 create index os_covid_event_district_id_idx on os_covid_event(district_id);
 
 insert into os_covid_event 
-	(covid_event_date, covid_event_type, covid_event_person_age, 
+	(covid_event_date, covid_event_type, covid_event_person_age, covid_event_person_age_padded,
 	 covid_event_person_gender, district_id) 
 	select 
-		datum, 'I', vek::integer, 
+		datum, 'I', vek::integer, lpad((vek::integer)::text, 3,'0'),
 		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
 		okres_lau_kod
 		from mv_mista_covid_nakazeni;
 	
 insert into os_covid_event 
-	(covid_event_date, covid_event_type, covid_event_person_age, 
+	(covid_event_date, covid_event_type, covid_event_person_age, covid_event_person_age_padded,
 	 covid_event_person_gender, district_id) 
 	select 
-		datum, 'R', vek::integer, 
+		datum, 'R', vek::integer, lpad((vek::integer)::text, 3,'0'),
 		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
 		okres_lau_kod
 		from mv_mista_covid_vyleceni ;
 	
 insert into os_covid_event 
-	(covid_event_date, covid_event_type, covid_event_person_age, 
+	(covid_event_date, covid_event_type, covid_event_person_age, covid_event_person_age_padded,
 	 covid_event_person_gender, district_id) 
 	select 
-		datum, 'D', vek::integer, 
+		datum, 'D', vek::integer, lpad((vek::integer)::text, 3,'0'),
 		case when pohlavi='Z' then 'F' when pohlavi='M' then 'M' end, 
 		okres_lau_kod
 		from mv_mista_covid_umrti ;

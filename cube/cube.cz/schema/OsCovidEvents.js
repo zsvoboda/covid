@@ -84,8 +84,8 @@ cube(`CovidEvents`, {
     },
 
     covidEventPersonAge: {
-      sql: `covid_event_person_age`,
-      type: `number`
+      sql: `covid_event_person_age_padded`,
+      type: `string`
     },
     
     covidEventDate: {

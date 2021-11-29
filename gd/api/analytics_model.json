@@ -1,0 +1,921 @@
+{
+    "analytics": {
+        "analyticalDashboards": [
+            {
+                "content": {
+                    "filterContextRef": {
+                        "identifier": {
+                            "id": "11f13677-1948-45b2-acfd-36cdab86b6cb",
+                            "type": "filterContext"
+                        }
+                    },
+                    "layout": {
+                        "type": "IDashboardLayout",
+                        "sections": [
+                            {
+                                "type": "IDashboardLayoutSection",
+                                "items": [
+                                    {
+                                        "type": "IDashboardLayoutItem",
+                                        "size": {
+                                            "xl": {
+                                                "gridWidth": 4
+                                            }
+                                        },
+                                        "widget": {
+                                            "type": "insight",
+                                            "title": "New Infections",
+                                            "description": "",
+                                            "ignoreDashboardFilters": [],
+                                            "dateDataSet": {
+                                                "identifier": {
+                                                    "id": "date",
+                                                    "type": "dataset"
+                                                }
+                                            },
+                                            "insight": {
+                                                "identifier": {
+                                                    "id": "09ced4aa-2a54-4b05-802a-c6d4134f8cb9",
+                                                    "type": "visualizationObject"
+                                                }
+                                            },
+                                            "drills": [],
+                                            "properties": {}
+                                        }
+                                    },
+                                    {
+                                        "type": "IDashboardLayoutItem",
+                                        "size": {
+                                            "xl": {
+                                                "gridWidth": 4
+                                            }
+                                        },
+                                        "widget": {
+                                            "type": "insight",
+                                            "title": "Died",
+                                            "description": "",
+                                            "ignoreDashboardFilters": [],
+                                            "dateDataSet": {
+                                                "identifier": {
+                                                    "id": "date",
+                                                    "type": "dataset"
+                                                }
+                                            },
+                                            "insight": {
+                                                "identifier": {
+                                                    "id": "81d38ea8-83aa-4360-b180-395d48844e4d",
+                                                    "type": "visualizationObject"
+                                                }
+                                            },
+                                            "drills": [],
+                                            "properties": {}
+                                        }
+                                    },
+                                    {
+                                        "type": "IDashboardLayoutItem",
+                                        "size": {
+                                            "xl": {
+                                                "gridWidth": 3
+                                            }
+                                        },
+                                        "widget": {
+                                            "type": "insight",
+                                            "title": "Death Rate",
+                                            "description": "",
+                                            "ignoreDashboardFilters": [],
+                                            "dateDataSet": {
+                                                "identifier": {
+                                                    "id": "date",
+                                                    "type": "dataset"
+                                                }
+                                            },
+                                            "insight": {
+                                                "identifier": {
+                                                    "id": "45d206cb-bc14-4e8b-8c4d-67ba4a963d46",
+                                                    "type": "visualizationObject"
+                                                }
+                                            },
+                                            "drills": [],
+                                            "properties": {}
+                                        }
+                                    },
+                                    {
+                                        "type": "IDashboardLayoutItem",
+                                        "size": {
+                                            "xl": {
+                                                "gridWidth": 6
+                                            }
+                                        },
+                                        "widget": {
+                                            "type": "insight",
+                                            "title": "Death Rate Trend",
+                                            "description": "",
+                                            "ignoreDashboardFilters": [],
+                                            "dateDataSet": {
+                                                "identifier": {
+                                                    "id": "date",
+                                                    "type": "dataset"
+                                                }
+                                            },
+                                            "insight": {
+                                                "identifier": {
+                                                    "id": "31e21d28-4a5a-44d9-8bf0-73ecd4fb4d03",
+                                                    "type": "visualizationObject"
+                                                }
+                                            },
+                                            "drills": [],
+                                            "properties": {}
+                                        }
+                                    },
+                                    {
+                                        "type": "IDashboardLayoutItem",
+                                        "size": {
+                                            "xl": {
+                                                "gridWidth": 6
+                                            }
+                                        },
+                                        "widget": {
+                                            "type": "insight",
+                                            "title": "Death rate by age and gender",
+                                            "description": "",
+                                            "ignoreDashboardFilters": [],
+                                            "dateDataSet": {
+                                                "identifier": {
+                                                    "id": "date",
+                                                    "type": "dataset"
+                                                }
+                                            },
+                                            "insight": {
+                                                "identifier": {
+                                                    "id": "db423e00-5e9b-4aff-9eaa-ed9424e6f0b9",
+                                                    "type": "visualizationObject"
+                                                }
+                                            },
+                                            "drills": [],
+                                            "properties": {}
+                                        }
+                                    },
+                                    {
+                                        "type": "IDashboardLayoutItem",
+                                        "size": {
+                                            "xl": {
+                                                "gridWidth": 12,
+                                                "gridHeight": 32
+                                            }
+                                        },
+                                        "widget": {
+                                            "type": "insight",
+                                            "title": "Deaths age histogram",
+                                            "description": "",
+                                            "ignoreDashboardFilters": [],
+                                            "dateDataSet": {
+                                                "identifier": {
+                                                    "id": "date",
+                                                    "type": "dataset"
+                                                }
+                                            },
+                                            "insight": {
+                                                "identifier": {
+                                                    "id": "f58fc360-55ec-4c21-aa03-1a5679931f47",
+                                                    "type": "visualizationObject"
+                                                }
+                                            },
+                                            "drills": [],
+                                            "properties": {}
+                                        }
+                                    },
+                                    {
+                                        "type": "IDashboardLayoutItem",
+                                        "size": {
+                                            "xl": {
+                                                "gridWidth": 12,
+                                                "gridHeight": 39
+                                            }
+                                        },
+                                        "widget": {
+                                            "type": "insight",
+                                            "title": "Infections & Deaths",
+                                            "description": "",
+                                            "ignoreDashboardFilters": [],
+                                            "dateDataSet": {
+                                                "identifier": {
+                                                    "id": "date",
+                                                    "type": "dataset"
+                                                }
+                                            },
+                                            "insight": {
+                                                "identifier": {
+                                                    "id": "e65a9921-5746-4ba9-9516-3cde0d5acad6",
+                                                    "type": "visualizationObject"
+                                                }
+                                            },
+                                            "drills": [],
+                                            "properties": {}
+                                        }
+                                    }
+                                ],
+                                "header": {
+                                    "title": "KPIs"
+                                }
+                            }
+                        ]
+                    },
+                    "version": "2"
+                },
+                "description": "",
+                "id": "e458b995-713c-40af-8b1f-924d377cc312",
+                "title": "COVID 19 Czech Republic"
+            }
+        ],
+        "dashboardPlugins": [],
+        "filterContexts": [
+            {
+                "content": {
+                    "filters": [
+                        {
+                            "dateFilter": {
+                                "from": "-89",
+                                "to": "0",
+                                "granularity": "GDC.time.date",
+                                "type": "relative"
+                            }
+                        },
+                        {
+                            "attributeFilter": {
+                                "displayForm": {
+                                    "identifier": {
+                                        "id": "district.district_name",
+                                        "type": "label"
+                                    }
+                                },
+                                "negativeSelection": true,
+                                "attributeElements": {
+                                    "uris": []
+                                },
+                                "localIdentifier": "b40f702caafc4b9f884199d719e57db0",
+                                "filterElementsBy": []
+                            }
+                        },
+                        {
+                            "attributeFilter": {
+                                "displayForm": {
+                                    "identifier": {
+                                        "id": "county.county_name",
+                                        "type": "label"
+                                    }
+                                },
+                                "negativeSelection": true,
+                                "attributeElements": {
+                                    "uris": []
+                                },
+                                "localIdentifier": "0b06eccc49ed44fb8ee9d35c54b440df",
+                                "filterElementsBy": []
+                            }
+                        }
+                    ],
+                    "version": "2"
+                },
+                "description": "",
+                "id": "11f13677-1948-45b2-acfd-36cdab86b6cb",
+                "title": "filterContext"
+            }
+        ],
+        "metrics": [
+            {
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/deaths} / {metric/infections}"
+                },
+                "description": "",
+                "id": "death_rate",
+                "title": "Death Rate (%)"
+            },
+            {
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.covid_event.covideventcnt}) \n    WHERE {label/covid_event.covid_event_type} = \"D\""
+                },
+                "description": "",
+                "id": "deaths",
+                "title": "Deaths"
+            },
+            {
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/deaths} / (SELECT {metric/population} BY {label/district.district_id} ALL OTHER )"
+                },
+                "description": "",
+                "id": "deaths_2",
+                "title": "Deaths (%)"
+            },
+            {
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.covid_event.covideventcnt}) \n    WHERE {label/covid_event.covid_event_type} = \"I\""
+                },
+                "description": "",
+                "id": "infections",
+                "title": "Infections"
+            },
+            {
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/infections} / (SELECT {metric/population} BY {label/district.district_id} ALL OTHER )"
+                },
+                "description": "",
+                "id": "infections_2",
+                "title": "Infections (%)"
+            },
+            {
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.demography.citypopulation})"
+                },
+                "description": "",
+                "id": "population",
+                "title": "Population"
+            },
+            {
+                "content": {
+                    "format": "[>=1000000000000]#,,,,.0 T;\n[>=1000000000]#,,,.0 B;\n[>=1000000]#,,.0 M;\n[>=1000]#,.0 K;\n[>=0]#,##0;\n[<=-1000000000000]-#,,,,.0 T;\n[<=-1000000000]-#,,,.0 B;\n[<=-1000000]-#,,.0 M;\n[<=-1000]-#,.0 K;\n[<0]-#,##0",
+                    "maql": "SELECT SUM({fact/fact.covid_event.covideventcnt}) \n    WHERE {label/covid_event.covid_event_type} = \"R\""
+                },
+                "description": "",
+                "id": "recoveries",
+                "title": "Recoveries"
+            },
+            {
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/recoveries} / (SELECT {metric/population} BY {label/district.district_id} ALL OTHER )"
+                },
+                "description": "",
+                "id": "recoveries_2",
+                "title": "Recoveries (%)"
+            },
+            {
+                "content": {
+                    "format": "#,##0.00%",
+                    "maql": "SELECT {metric/recoveries} / {metric/infections}"
+                },
+                "description": "",
+                "id": "recovery_rate",
+                "title": "Recovery Rate (%)"
+            }
+        ],
+        "visualizationObjects": [
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "4103f41bda2f4abeafe109312c0b680e",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "infections",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Infections"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {},
+                    "visualizationUrl": "local:headline",
+                    "version": "2"
+                },
+                "description": "KPI Infections",
+                "id": "09ced4aa-2a54-4b05-802a-c6d4134f8cb9",
+                "title": "KPI Infections"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "ad49b50e60e1477788668503d06ffc9b",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "recoveries",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Recoveries"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {},
+                    "visualizationUrl": "local:headline",
+                    "version": "2"
+                },
+                "description": "KPI Recoveries",
+                "id": "22b44e40-3244-4f5a-a5ad-ffea8c2f2228",
+                "title": "KPI Recoveries"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "834b6f3961de4790865006c3d8a05378",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "death_rate",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "computeRatio": false,
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Death Rate (%)"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "b516fb454a1e41478f4142923a3d71f4",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "infections",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "computeRatio": false,
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Infections"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "secondary_measures"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "attribute": {
+                                        "localIdentifier": "278c6d2f2b424df78d243206c31e75e8",
+                                        "displayForm": {
+                                            "identifier": {
+                                                "id": "date.month",
+                                                "type": "label"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "view"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {
+                        "controls": {
+                            "dualAxis": true,
+                            "legend": {
+                                "position": "top"
+                            },
+                            "primaryChartType": "column",
+                            "secondaryChartType": "line",
+                            "secondary_yaxis": {
+                                "measures": [
+                                    "b516fb454a1e41478f4142923a3d71f4"
+                                ]
+                            }
+                        }
+                    },
+                    "visualizationUrl": "local:combo2",
+                    "version": "2"
+                },
+                "description": "Death Rate Trend",
+                "id": "31e21d28-4a5a-44d9-8bf0-73ecd4fb4d03",
+                "title": "Death Rate Trend"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "28d53cc9c28d4c9ca09af66c0c68c3ba",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "death_rate",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Death Rate (%)"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {},
+                    "visualizationUrl": "local:headline",
+                    "version": "2"
+                },
+                "description": "KPI Death Rate",
+                "id": "45d206cb-bc14-4e8b-8c4d-67ba4a963d46",
+                "title": "KPI Death Rate"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "a04025d392e544a29cbfe6ff95ca8be2",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "deaths",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Deaths"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {},
+                    "visualizationUrl": "local:headline",
+                    "version": "2"
+                },
+                "description": "KPI Deaths",
+                "id": "81d38ea8-83aa-4360-b180-395d48844e4d",
+                "title": "KPI Deaths"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "5cb467a186074acb8c4c85498ad2f075",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "death_rate",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Death Rate (%)"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "attribute": {
+                                        "localIdentifier": "07a5f82f9a254856bbacd1a6f9722179",
+                                        "displayForm": {
+                                            "identifier": {
+                                                "id": "covid_event.covid_event_person_age",
+                                                "type": "label"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "view"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "attribute": {
+                                        "localIdentifier": "08a878be3b104c1aa6a0feaa394d0536",
+                                        "displayForm": {
+                                            "identifier": {
+                                                "id": "covid_event.covid_event_person_gender",
+                                                "type": "label"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "stack"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {
+                        "controls": {
+                            "legend": {
+                                "position": "top"
+                            }
+                        }
+                    },
+                    "visualizationUrl": "local:column",
+                    "version": "2"
+                },
+                "description": "Death rate by age and gender",
+                "id": "db423e00-5e9b-4aff-9eaa-ed9424e6f0b9",
+                "title": "Death rate by age and gender"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "c7372e5a308043279246be3fe5e827d0",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "deaths_2",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Deaths (%)"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "da25ebafbd9e415e9bf72a1698d4bd19",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "infections_2",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Infections (%)"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "secondary_measures"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "attribute": {
+                                        "localIdentifier": "f8a03c53031a48ba923826f617830d32",
+                                        "displayForm": {
+                                            "identifier": {
+                                                "id": "county.county_name",
+                                                "type": "label"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "attribute"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {},
+                    "visualizationUrl": "local:scatter",
+                    "version": "2"
+                },
+                "description": "Infections & Deaths",
+                "id": "e65a9921-5746-4ba9-9516-3cde0d5acad6",
+                "title": "Infections & Deaths"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "238e4463583e4d1c8f1e17dd6a71bf42",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "infections_2",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Infections (%)"
+                                    }
+                                },
+                                {
+                                    "measure": {
+                                        "localIdentifier": "14c54be39337422f95e037832c66e08d",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "recovery_rate",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Recovery Rate (%)"
+                                    }
+                                },
+                                {
+                                    "measure": {
+                                        "localIdentifier": "0098ee34580d49c08900b9735dfefebd",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "death_rate",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Death Rate (%)"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "attribute": {
+                                        "localIdentifier": "a9ba51c1b9274987a6aa2deb52988d6e",
+                                        "displayForm": {
+                                            "identifier": {
+                                                "id": "county.county_name",
+                                                "type": "label"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "attribute"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [
+                        {
+                            "attributeSortItem": {
+                                "attributeIdentifier": "a9ba51c1b9274987a6aa2deb52988d6e",
+                                "direction": "asc"
+                            }
+                        }
+                    ],
+                    "properties": {},
+                    "visualizationUrl": "local:table",
+                    "version": "2"
+                },
+                "description": "Rates by county",
+                "id": "f29e388c-5c1e-4782-96dd-1220a8c87596",
+                "title": "Rates by county"
+            },
+            {
+                "content": {
+                    "buckets": [
+                        {
+                            "items": [
+                                {
+                                    "measure": {
+                                        "localIdentifier": "aac923a1199241749a0520952346bf8c",
+                                        "definition": {
+                                            "measureDefinition": {
+                                                "item": {
+                                                    "identifier": {
+                                                        "id": "deaths",
+                                                        "type": "metric"
+                                                    }
+                                                },
+                                                "filters": []
+                                            }
+                                        },
+                                        "title": "Deaths"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "measures"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "attribute": {
+                                        "localIdentifier": "c733f33dec83447cbcd61b444d5fc083",
+                                        "displayForm": {
+                                            "identifier": {
+                                                "id": "covid_event.covid_event_person_age",
+                                                "type": "label"
+                                            }
+                                        },
+                                        "alias": "Age"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "view"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "attribute": {
+                                        "localIdentifier": "e65d917117d844faa04a584d3f38c74e",
+                                        "displayForm": {
+                                            "identifier": {
+                                                "id": "covid_event.covid_event_person_gender",
+                                                "type": "label"
+                                            }
+                                        },
+                                        "alias": "Gender"
+                                    }
+                                }
+                            ],
+                            "localIdentifier": "stack"
+                        }
+                    ],
+                    "filters": [],
+                    "sorts": [],
+                    "properties": {
+                        "controls": {
+                            "legend": {
+                                "position": "top"
+                            },
+                            "stackMeasuresToPercent": false
+                        }
+                    },
+                    "visualizationUrl": "local:column",
+                    "version": "2"
+                },
+                "description": "Deaths",
+                "id": "f58fc360-55ec-4c21-aa03-1a5679931f47",
+                "title": "Deaths"
+            }
+        ]
+    }
+}

@@ -1,0 +1,345 @@
+{
+    "pdm": {
+        "tables": [
+            {
+                "columns": [
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": true,
+                        "name": "city_id"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "city_latitude"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "city_longitude"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "city_name"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "district_id",
+                        "referencedTableColumn": "district_id",
+                        "referencedTableId": "os_district"
+                    }
+                ],
+                "id": "os_city",
+                "path": [
+                    "public",
+                    "os_city"
+                ],
+                "type": "TABLE"
+            },
+            {
+                "columns": [
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": true,
+                        "name": "country_id"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "country_name"
+                    }
+                ],
+                "id": "os_country",
+                "path": [
+                    "public",
+                    "os_country"
+                ],
+                "type": "TABLE"
+            },
+            {
+                "columns": [
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "country_id",
+                        "referencedTableColumn": "country_id",
+                        "referencedTableId": "os_country"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": true,
+                        "name": "county_id"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "county_name"
+                    }
+                ],
+                "id": "os_county",
+                "path": [
+                    "public",
+                    "os_county"
+                ],
+                "type": "TABLE"
+            },
+            {
+                "columns": [
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_event_cnt"
+                    },
+                    {
+                        "dataType": "DATE",
+                        "isPrimaryKey": false,
+                        "name": "covid_event_date"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": true,
+                        "name": "covid_event_id"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_event_person_age"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "covid_event_person_gender"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "covid_event_type"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "district_id",
+                        "referencedTableColumn": "district_id",
+                        "referencedTableId": "os_district"
+                    }
+                ],
+                "id": "os_covid_event",
+                "path": [
+                    "public",
+                    "os_covid_event"
+                ],
+                "type": "TABLE"
+            },
+            {
+                "columns": [
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "country_id",
+                        "referencedTableColumn": "country_id",
+                        "referencedTableId": "os_country"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_admissions"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_current"
+                    },
+                    {
+                        "dataType": "DATE",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_date"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_deaths"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_ecmo"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_ecmo_ventilation"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_hfno"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": true,
+                        "name": "covid_hospitalisation_id"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_intensive_care"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_light_symptoms"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_medium_symptoms"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_no_symptoms"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_oxygen"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_severe_symptoms"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_hospitalisation_ventilation"
+                    }
+                ],
+                "id": "os_covid_hospitalisation",
+                "path": [
+                    "public",
+                    "os_covid_hospitalisation"
+                ],
+                "type": "TABLE"
+            },
+            {
+                "columns": [
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "country_id",
+                        "referencedTableColumn": "country_id",
+                        "referencedTableId": "os_country"
+                    },
+                    {
+                        "dataType": "DATE",
+                        "isPrimaryKey": false,
+                        "name": "covid_testing_date"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": true,
+                        "name": "covid_testing_id"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_testing_type_ag"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "covid_testing_type_pcr"
+                    }
+                ],
+                "id": "os_covid_testing",
+                "path": [
+                    "public",
+                    "os_covid_testing"
+                ],
+                "type": "TABLE"
+            },
+            {
+                "columns": [
+                    {
+                        "dataType": "NUMERIC",
+                        "isPrimaryKey": false,
+                        "name": "city_average_age"
+                    },
+                    {
+                        "dataType": "NUMERIC",
+                        "isPrimaryKey": false,
+                        "name": "city_average_age_female"
+                    },
+                    {
+                        "dataType": "NUMERIC",
+                        "isPrimaryKey": false,
+                        "name": "city_average_age_male"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "city_id",
+                        "referencedTableColumn": "city_id",
+                        "referencedTableId": "os_city"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "city_population"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "city_population_female"
+                    },
+                    {
+                        "dataType": "INT",
+                        "isPrimaryKey": false,
+                        "name": "city_population_male"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": true,
+                        "name": "demography_id"
+                    }
+                ],
+                "id": "os_demography",
+                "path": [
+                    "public",
+                    "os_demography"
+                ],
+                "type": "TABLE"
+            },
+            {
+                "columns": [
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "county_id",
+                        "referencedTableColumn": "county_id",
+                        "referencedTableId": "os_county"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": true,
+                        "name": "district_id"
+                    },
+                    {
+                        "dataType": "STRING",
+                        "isPrimaryKey": false,
+                        "name": "district_name"
+                    }
+                ],
+                "id": "os_district",
+                "path": [
+                    "public",
+                    "os_district"
+                ],
+                "type": "TABLE"
+            }
+        ]
+    }
+}
