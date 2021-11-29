@@ -40,54 +40,6 @@ cube(`Districts`, {
       sql: `${cityFemalePopulation}`,
       type: `sum`,
       drillMembers: [districtName]
-    },
-
-    districtInfections: {
-      sql: `${covidEventInfections}`,
-      type: `sum`,
-      drillMembers: [districtName]
-    },
-
-    districtInfectionsPerPopulation: {
-      sql: `100 * ${districtInfections}/nullif(${districtPopulation}, 0)`,
-      type: `number`,
-      format: `percent`
-    },
-
-    districtRecoveries: {
-      sql: `${covidEventRecoveries}`,
-      type: `sum`,
-      drillMembers: [districtName]
-    },
-
-    districtRecoveriesPerPopulation: {
-      sql: `100 * ${districtRecoveries}/nullif(${districtPopulation}, 0)`,
-      type: `number`,
-      format: `percent`
-    },
-
-    districtRecoveryRate: {
-      sql: `100 * ${districtRecoveries}/nullif(${districtInfections}, 0)`,
-      type: `number`,
-      format: `percent`
-    },
-
-    districtDeaths: {
-      sql: `${covidEventDeaths}`,
-      type: `sum`,
-      drillMembers: [districtName]
-    },
-
-    districtDeathsPerPopulation: {
-      sql: `100 * ${districtDeaths}/nullif(${districtPopulation}, 0)`,
-      type: `number`,
-      format: `percent`
-    },
-
-    districtDeathRate: {
-      sql: `100 * ${districtDeaths}/nullif(${districtInfections}, 0)`,
-      type: `number`,
-      format: `percent`
     }
 
   },
@@ -119,24 +71,6 @@ cube(`Districts`, {
 
     cityFemalePopulation: {
       sql: `${Cities.cityFemalePopulation}`,
-      type: `number`,
-      subQuery: true
-    },
-
-    covidEventInfections: {
-      sql: `${CovidEvents.infections}`,
-      type: `number`,
-      subQuery: true
-    },
-
-    covidEventRecoveries: {
-      sql: `${CovidEvents.recoveries}`,
-      type: `number`,
-      subQuery: true
-    },
-
-    covidEventDeaths: {
-      sql: `${CovidEvents.deaths}`,
       type: `number`,
       subQuery: true
     }
