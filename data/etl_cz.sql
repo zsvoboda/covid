@@ -1,16 +1,16 @@
 
 
 --drop extension file_fdw;
-create extension file_fdw;
+--create extension file_fdw;
 
 --drop server covid_source_data foreign data wrapper file_fdw;
-create server covid_source_data foreign data wrapper file_fdw;
+--create server covid_source_data foreign data wrapper file_fdw;
 
 /*
 -- Geografie
 
-drop foreign table if exists public.is_mista;
-create foreign table public.is_mista
+drop foreign table if exists is_mista;
+create foreign table is_mista
 (
 	obec text,
 	obec_kod text,
@@ -31,14 +31,15 @@ server covid_source_data options
 
 drop materialized view if exists mv_mista;
 create materialized view mv_mista as
- select obec, obec_kod, okres, okres_kod, kraj, kraj_kod, psc, latitude, longitude from public.is_mista;
+ select obec, obec_kod, okres, okres_kod, kraj, kraj_kod, psc, latitude, longitude from is_mista;
  
  */
 
 -- COVID obce
 
-drop foreign table if exists public.is_mista_covid;
-create foreign table public.is_mista_covid
+drop materialized view if exists mv_mista_covid;
+drop foreign table if exists is_mista_covid;
+create foreign table is_mista_covid
 (
 	id text,
 	den text,
@@ -64,7 +65,6 @@ server covid_source_data options
     header 'true'
 );
 
-drop materialized view if exists mv_mista_covid;
 create materialized view mv_mista_covid as
  select id,
 	den,
@@ -81,12 +81,13 @@ create materialized view mv_mista_covid as
 	aktivni_pripady::integer,
 	nove_pripady_65::integer,
 	nove_pripady_7_dni::integer,
-	nove_pripady_14_dni::integer from public.is_mista_covid;
+	nove_pripady_14_dni::integer from is_mista_covid;
 
 -- COVID kraj okres nakazeni vyleceni umrti
 
-drop foreign table if exists public.is_mista_covid_kumul;
-create foreign table public.is_mista_covid_kumul
+drop materialized view if exists mv_mista_covid_kumul;
+drop foreign table if exists is_mista_covid_kumul;
+create foreign table is_mista_covid_kumul
 (
 	id text,
 	datum text,
@@ -103,8 +104,6 @@ server covid_source_data options
     header 'true'
 );
 
-
-drop materialized view if exists mv_mista_covid_kumul;
 create materialized view mv_mista_covid_kumul as
  select id,
 	datum::date,
@@ -112,12 +111,13 @@ create materialized view mv_mista_covid_kumul as
 	okres_kod,
 	kumulativni_pocet_nakazenych::integer,
 	kumulativni_pocet_vylecenych::integer,
-	kumulativni_pocet_umrti::integer from public.is_mista_covid_kumul;
+	kumulativni_pocet_umrti::integer from is_mista_covid_kumul;
 
 -- COVID orp (obce s rozsirenou pusobnosti)
 
-drop foreign table if exists public.is_mista_covid_orp;
-create foreign table public.is_mista_covid_orp
+drop materialized view if exists mv_mista_covid_orp;
+drop foreign table if exists is_mista_covid_orp;
+create foreign table is_mista_covid_orp
 (
 	id text,
 	den text,
@@ -141,7 +141,6 @@ server covid_source_data options
     header 'true'
 );
 
-drop materialized view if exists mv_mista_covid_orp;
 create materialized view mv_mista_covid_orp as
  select id,
 	den,
@@ -156,12 +155,13 @@ create materialized view mv_mista_covid_orp as
 	prevalence_75::integer,
 	aktualni_pocet_hospitalizovanych_osob::integer,
 	nove_hosp_7::integer,
-	testy_7::integer from public.is_mista_covid_orp;
+	testy_7::integer from is_mista_covid_orp;
 
 -- COVID hospitalizace
 
-drop foreign table if exists public.is_covid_hospitalizace;
-create foreign table public.is_covid_hospitalizace
+drop materialized view if exists mv_covid_hospitalizace;
+drop foreign table if exists is_covid_hospitalizace;
+create foreign table is_covid_hospitalizace
 (
 	id text,
 	datum text,
@@ -188,7 +188,6 @@ server covid_source_data options
     header 'true'
 );
 
-drop materialized view if exists mv_covid_hospitalizace;
 create materialized view mv_covid_hospitalizace as
  select id,
 	datum::date,
@@ -207,14 +206,14 @@ create materialized view mv_covid_hospitalizace as
 	tezky_upv_ecmo::integer,
 	umrti::integer,
 	kum_umrti::integer 
- from public.is_covid_hospitalizace;
+ from is_covid_hospitalizace;
 
 
 -- COVID nakazeni vyleceni umrti testy
 
-
-drop foreign table if exists public.is_covid;
-create foreign table public.is_covid
+drop materialized view if exists mv_covid;
+drop foreign table if exists is_covid;
+create foreign table is_covid
 (
 	datum text,
 	kumulativni_pocet_nakazenych text,
@@ -235,7 +234,6 @@ server covid_source_data options
     header 'true'
 );
 
-drop materialized view if exists mv_covid;
 create materialized view mv_covid as
  select  
  	datum::date,
@@ -249,12 +247,13 @@ create materialized view mv_covid as
 	prirustkovy_pocet_umrti::integer,
 	prirustkovy_pocet_provedenych_testu::integer,
 	prirustkovy_pocet_provedenych_ag_testu::integer
- from public.is_covid;
+ from is_covid;
 
 -- COVID nakazeni osoby
 
-drop foreign table if exists public.is_mista_covid_nakazeni;
-create foreign table public.is_mista_covid_nakazeni
+drop materialized view if exists mv_mista_covid_nakazeni;
+drop foreign table if exists is_mista_covid_nakazeni;
+create foreign table is_mista_covid_nakazeni
 (
 	id text,
 	datum text,
@@ -273,7 +272,6 @@ server covid_source_data options
     header 'true'
 );
 
-drop materialized view if exists mv_mista_covid_nakazeni;
 create materialized view mv_mista_covid_nakazeni as
  select id,
 	datum::date,
@@ -283,12 +281,13 @@ create materialized view mv_mista_covid_nakazeni as
 	okres_lau_kod,
 	nakaza_v_zahranici::integer,
 	nakaza_zeme_csu_kod,
-	reportovano_khs::integer from public.is_mista_covid_nakazeni;
+	reportovano_khs::integer from is_mista_covid_nakazeni;
 
 -- COVID vyleceni osoby
 
-drop foreign table if exists public.is_mista_covid_vyleceni;
-create foreign table public.is_mista_covid_vyleceni
+drop materialized view if exists mv_mista_covid_vyleceni;
+drop foreign table if exists is_mista_covid_vyleceni;
+create foreign table is_mista_covid_vyleceni
 (
 	id text,
 	datum text,
@@ -304,19 +303,19 @@ server covid_source_data options
     header 'true'
 );
 
-drop materialized view if exists mv_mista_covid_vyleceni;
 create materialized view mv_mista_covid_vyleceni as
  select id,
 	datum::date,
 	vek::integer,
 	pohlavi,
 	kraj_nuts_kod,
-	okres_lau_kod from public.is_mista_covid_vyleceni;
+	okres_lau_kod from is_mista_covid_vyleceni;
 
 -- COVID umrti osoby
 
-drop foreign table if exists public.is_mista_covid_umrti;
-create foreign table public.is_mista_covid_umrti
+drop materialized view if exists mv_mista_covid_umrti;
+drop foreign table if exists is_mista_covid_umrti;
+create foreign table is_mista_covid_umrti
 (
 	id text,
 	datum text,
@@ -332,14 +331,13 @@ server covid_source_data options
     header 'true'
 );
 
-drop materialized view if exists mv_mista_covid_umrti;
 create materialized view mv_mista_covid_umrti as
  select id,
 	datum::date,
 	vek::integer,
 	pohlavi,
 	kraj_nuts_kod,
-	okres_lau_kod from public.is_mista_covid_umrti;
+	okres_lau_kod from is_mista_covid_umrti;
 
 -- MODEL
 
@@ -352,7 +350,7 @@ create table os_country(
 	country_name varchar(50)
 );
 
-insert into public.os_country (country_id, country_name) values('CZ', 'Česká republika');
+insert into os_country (country_id, country_name) values('CZ', 'Česká republika');
 
 drop table if exists os_county;
 create table os_county (
@@ -412,6 +410,10 @@ insert into os_demography (
 	
 */
 
+drop view if exists v_covid_by_district;
+drop view if exists v_demography_by_district;
+
+
 drop table if exists os_covid_event;
 create table os_covid_event (
 	covid_event_id integer generated always as identity primary key,
@@ -466,7 +468,7 @@ create table os_covid_testing (
 create index os_covid_testing_country_id_idx on os_covid_testing(country_id);
 
 insert into os_covid_testing (covid_testing_date, covid_testing_type_ag, covid_testing_type_pcr) 
-	select datum, prirustkovy_pocet_provedenych_ag_testu, prirustkovy_pocet_provedenych_testu from public.mv_covid; 
+	select datum, prirustkovy_pocet_provedenych_ag_testu, prirustkovy_pocet_provedenych_testu from mv_covid; 
 
 
 drop table if exists os_covid_hospitalisation;
@@ -507,7 +509,6 @@ insert into os_covid_hospitalisation (
 	
 --VIEWS
 	
-drop view if exists v_covid_by_district;
 create view v_covid_by_district as
 	select distinct od.district_id, 
 		sum(oce.covid_event_cnt) filter (where oce.covid_event_type in ('I')) as district_infections, 
@@ -517,7 +518,6 @@ create view v_covid_by_district as
 		join os_covid_event oce on oce.district_id = od.district_id 
 		group by 1;
 
-drop view if exists v_demography_by_district;
 create view v_demography_by_district as
 	select distinct od.district_id, 
 		sum(ode.city_population) as district_population
