@@ -22,7 +22,26 @@ cube(`Countries`, {
     count: {
       type: `count`,
       drillMembers: [countryName]
+    },
+
+    countryPopulation: {
+      sql: `${population}`,
+      type: `sum`,
+      drillMembers: [countryName]
+    },
+
+    countryMalePopulation: {
+      sql: `${malePopulation}`,
+      type: `sum`,
+      drillMembers: [countryName]
+    },
+
+    countryFemalePopulation: {
+      sql: `${femalePopulation}`,
+      type: `sum`,
+      drillMembers: [countryName]
     }
+
   },
   
   dimensions: {
@@ -36,6 +55,24 @@ cube(`Countries`, {
     countryName: {
       sql: `country_name`,
       type: `string`
+    },
+
+    population: {
+      sql: `${Counties.countyPopulation}`,
+      type: `number`,
+      subQuery: true
+    },
+
+    malePopulation: {
+      sql: `${Counties.countyMalePopulation}`,
+      type: `number`,
+      subQuery: true
+    },
+
+    femalePopulation: {
+      sql: `${Counties.countyFemalePopulation}`,
+      type: `number`,
+      subQuery: true
     }
   
   },

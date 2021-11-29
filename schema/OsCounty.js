@@ -14,10 +14,30 @@ cube(`Counties`, {
   },
   
   measures: {
+    
     count: {
       type: `count`,
       drillMembers: [countyName]
+    },
+
+    countyPopulation: {
+      sql: `${population}`,
+      type: `sum`,
+      drillMembers: [countyName]
+    },
+
+    countyMalePopulation: {
+      sql: `${malePopulation}`,
+      type: `sum`,
+      drillMembers: [countyName]
+    },
+
+    countyFemalePopulation: {
+      sql: `${femalePopulation}`,
+      type: `sum`,
+      drillMembers: [countyName]
     }
+
   },
   
   dimensions: {
@@ -31,6 +51,24 @@ cube(`Counties`, {
     countyName: {
       sql: `county_name`,
       type: `string`
+    },
+
+    population: {
+      sql: `${Districts.districtPopulation}`,
+      type: `number`,
+      subQuery: true
+    },
+
+    malePopulation: {
+      sql: `${Districts.districtMalePopulation}`,
+      type: `number`,
+      subQuery: true
+    },
+
+    femalePopulation: {
+      sql: `${Districts.districtFemalePopulation}`,
+      type: `number`,
+      subQuery: true
     }
     
   },

@@ -25,19 +25,19 @@ cube(`Districts`, {
     },
 
     districtPopulation: {
-      sql: `${cityPopulation}`,
+      sql: `${population}`,
       type: `sum`,
       drillMembers: [districtName]
     },
 
     districtMalePopulation: {
-      sql: `${cityMalePopulation}`,
+      sql: `${malePopulation}`,
       type: `sum`,
       drillMembers: [districtName]
     },
 
     districtFemalePopulation: {
-      sql: `${cityFemalePopulation}`,
+      sql: `${femalePopulation}`,
       type: `sum`,
       drillMembers: [districtName]
     }
@@ -57,19 +57,19 @@ cube(`Districts`, {
       type: `string`
     },
 
-    cityPopulation: {
+    population: {
       sql: `${Cities.cityPopulation}`,
       type: `number`,
       subQuery: true
     },
 
-    cityMalePopulation: {
+    malePopulation: {
       sql: `${Cities.cityMalePopulation}`,
       type: `number`,
       subQuery: true
     },
 
-    cityFemalePopulation: {
+    femalePopulation: {
       sql: `${Cities.cityFemalePopulation}`,
       type: `number`,
       subQuery: true
