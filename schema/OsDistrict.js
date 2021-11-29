@@ -11,17 +11,9 @@ cube(`Districts`, {
       relationship: `hasMany`,
       sql: `${Districts}.district_id = ${Cities}.district_id`
     },
-    Infections: {
+    CovidEvents: {
       relationship: `hasMany`,
-      sql: `${Districts}.district_id = ${Infections}.district_id`
-    },
-    Recoveries: {
-      relationship: `hasMany`,
-      sql: `${Districts}.district_id = ${Recoveries}.district_id`
-    },
-    Deaths: {
-      relationship: `hasMany`,
-      sql: `${Districts}.district_id = ${Deaths}.district_id`
+      sql: `${Districts}.district_id = ${CovidEvents}.district_id`
     }
   },
   
@@ -51,7 +43,7 @@ cube(`Districts`, {
     },
 
     districtInfections: {
-      sql: `${infections}`,
+      sql: `${covidEventInfections}`,
       type: `sum`,
       drillMembers: [districtName]
     },
@@ -63,7 +55,7 @@ cube(`Districts`, {
     },
 
     districtRecoveries: {
-      sql: `${recoveries}`,
+      sql: `${covidEventRecoveries}`,
       type: `sum`,
       drillMembers: [districtName]
     },
@@ -81,7 +73,7 @@ cube(`Districts`, {
     },
 
     districtDeaths: {
-      sql: `${deaths}`,
+      sql: `${covidEventDeaths}`,
       type: `sum`,
       drillMembers: [districtName]
     },
@@ -131,20 +123,20 @@ cube(`Districts`, {
       subQuery: true
     },
 
-    infections: {
-      sql: `${Infections.count}`,
+    covidEventInfections: {
+      sql: `${CovidEvents.infections}`,
       type: `number`,
       subQuery: true
     },
 
-    recoveries: {
-      sql: `${Recoveries.count}`,
+    covidEventRecoveries: {
+      sql: `${CovidEvents.recoveries}`,
       type: `number`,
       subQuery: true
     },
 
-    deaths: {
-      sql: `${Deaths.count}`,
+    covidEventDeaths: {
+      sql: `${CovidEvents.deaths}`,
       type: `number`,
       subQuery: true
     }
