@@ -17,22 +17,30 @@ cube(`Cities`, {
     
     count: {
       type: `count`,
-      drillMembers: [cityName]
+      drillMembers: [cityName],
+      title: `Cities count`,
+      description: `Number of cities`
     },
 
     cityPopulation: {
-      sql: `${demographyPopulation}`,
-      type: `sum`
+      sql: `${population}`,
+      type: `sum`,
+      title: `City population`,
+      description: `City population`
     },
 
     cityMalePopulation: {
-      sql: `${demographyMalePopulation}`,
-      type: `sum`
+      sql: `${malePopulation}`,
+      type: `sum`,
+      title: `City male population`,
+      description: `City male population`
     },
 
     cityFemalePopulation: {
-      sql: `${demographyFemalePopulation}`,
-      type: `sum`
+      sql: `${femalePopulation}`,
+      type: `sum`,
+      title: `City female population`,
+      description: `City female population`
     }
 
   },
@@ -42,40 +50,51 @@ cube(`Cities`, {
     cityId: {
       sql: `city_id`,
       type: `string`,
-      primaryKey: true
+      primaryKey: true,
+      title: `City code`,
+      description: `City code`
     },
     
     cityName: {
       sql: `city_name`,
-      type: `string`
+      type: `string`,
+      title: `City name`,
+      description: `City name`
     },
     
     cityLatitude: {
       sql: `city_latitude`,
-      type: `string`
+      type: `geo`,
+      title: `City latitude`,
+      description: `City latitude`
     },
     
     cityLongitude: {
       sql: `city_longitude`,
-      type: `string`
+      type: `geo`,
+      title: `City longitude`,
+      description: `City longitude`
     },
 
-    demographyPopulation: {
+    population: {
       sql: `${Demographies.population}`,
       type: `number`,
-      subQuery: true
+      subQuery: true,
+      shown: false
     },
 
-    demographyMalePopulation: {
+    malePopulation: {
       sql: `${Demographies.populationMale}`,
       type: `number`,
-      subQuery: true
+      subQuery: true,
+      shown: false
     },
 
-    demographyFemalePopulation: {
+    femalePopulation: {
       sql: `${Demographies.populationFemale}`,
       type: `number`,
-      subQuery: true
+      subQuery: true,
+      shown: false
     }
     
   },

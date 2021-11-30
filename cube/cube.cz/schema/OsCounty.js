@@ -17,25 +17,33 @@ cube(`Counties`, {
     
     count: {
       type: `count`,
-      drillMembers: [countyName]
+      drillMembers: [countyName],
+      title: `Counties count`,
+      description: `Number of counties`
     },
 
     countyPopulation: {
       sql: `${population}`,
       type: `sum`,
-      drillMembers: [countyName]
+      drillMembers: [countyName],
+      title: `County population`,
+      description: `County population`
     },
 
     countyMalePopulation: {
       sql: `${malePopulation}`,
       type: `sum`,
-      drillMembers: [countyName]
+      drillMembers: [countyName],
+      title: `County male population`,
+      description: `County male population`
     },
 
     countyFemalePopulation: {
       sql: `${femalePopulation}`,
       type: `sum`,
-      drillMembers: [countyName]
+      drillMembers: [countyName],
+      title: `County female population`,
+      description: `County female population`
     }
 
   },
@@ -45,30 +53,37 @@ cube(`Counties`, {
     countyId: {
       sql: `county_id`,
       type: `string`,
-      primaryKey: true
+      primaryKey: true,
+      title: `County code`,
+      description: `County code`
     },
     
     countyName: {
       sql: `county_name`,
-      type: `string`
+      type: `string`,
+      title: `County name`,
+      description: `County name`
     },
 
     population: {
       sql: `${Districts.districtPopulation}`,
       type: `number`,
-      subQuery: true
+      subQuery: true,
+      shown: false
     },
 
     malePopulation: {
       sql: `${Districts.districtMalePopulation}`,
       type: `number`,
-      subQuery: true
+      subQuery: true,
+      shown: false
     },
 
     femalePopulation: {
       sql: `${Districts.districtFemalePopulation}`,
       type: `number`,
-      subQuery: true
+      subQuery: true,
+      shown: false
     }
     
   },
