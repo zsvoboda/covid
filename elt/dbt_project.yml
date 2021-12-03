@@ -19,5 +19,13 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
     materialized: table
-    covid_cz:
+    covid_mv:
+        materialized: table
+    covid_os:
+        materialized: table
+    covid_v:
+        materialized: view
+    geo_mv:
+        materialized: table
+    geo_os:
         materialized: table
