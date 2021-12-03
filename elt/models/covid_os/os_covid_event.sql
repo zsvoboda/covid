@@ -13,7 +13,7 @@ with final as (
 union 
 
     select 
-	    (row_number() over())::integer as covid_event_id,
+	    (row_number() over()+30000000)::integer as covid_event_id,
         datum::date as covid_event_date, 
         'R'::char(1) as covid_event_type, 
         vek::smallint as covid_event_person_age, 
@@ -26,7 +26,7 @@ union
 union 
 
     select 
-	    (row_number() over())::integer as covid_event_id,
+	    (row_number() over()+60000000)::integer as covid_event_id,
         datum::date as covid_event_date, 
         'D'::char(1) as covid_event_type, 
         vek::smallint as covid_event_person_age,  
