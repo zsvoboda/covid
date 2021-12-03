@@ -15,6 +15,8 @@ docker run -d -p 3000:3000 -p 4000:4000 -p 3306:3306 \
   -e CUBE_SQL_USERNAME=cube \
   -e CUBE_SQL_PASSWORD=cube \
   -e CUBEJS_DEV_MODE=true \
+  -e CUBEJS_LOG_LEVEL=trace \
+  -e DEBUG_LOG=true \
   -e TZ="Etc/UTC" \
   -v ${COVID_HOME}/cube/cube.cz:/cube/conf \
   cubejs/cube

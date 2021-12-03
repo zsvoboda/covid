@@ -35,15 +35,6 @@ GET {{endpoint}}/api/entities/workspaces/covid.cz
 Content-Type: application/vnd.gooddata.api+json
 Authorization: Bearer {{token}}
 
-
-### Publish database connection 
-# @name createInitialAnalyticsModelObjects
-PUT {{endpoint}}/api/layout/workspaces/insurance-demo/analyticsModel/
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-< ./analytics_model_original.json
-
 ### Get Physical Model
 # @name getPhysicalModel
 GET {{endpoint}}/api/layout/dataSources/covid.cz/physicalModel

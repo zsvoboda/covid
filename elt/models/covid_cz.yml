@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: os_covid_event
+    config:
+      tags: ['date', 'location']
+    columns:
+      - name: covid_event_id
+        tests:
+          - primary_key
+          - unique
+          - not_null
+      - name: covid_event_date
+        tests:
+          - not null
+      - name: covid_event_type
+        tests:
+          - not null
+          - accepted_values:
+              values: ['I', 'R', 'D']
+              config:
+                severity: error
+      - name: covid_event_person_age
+        tests:
+      - name: covid_event_person_age_padded
+      - name: covid_event_person_age_gender
+      - name: district_id
+      - name: covid_event_cnt
+        tests:
+          - not null
+          - accepted_values:
+              values: [1]
+              config:
+                severity: error
