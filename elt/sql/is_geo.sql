@@ -24,25 +24,4 @@ server covid_source_data options
     program 'curl -s https://raw.githubusercontent.com/33bcdd/souradnice-mest/master/souradnice.csv || exit $(( $? == 23 ? 0 : $? ))',
     format 'csv',
     header 'true'
-);
-
-drop table if exists is_demografie;
-create table is_demografie
-(
-	obec_kod text,
-    obec_kod2 text,
-    obec text,
-    pocet_obyvatel text,
-    pocet_muzi text,
-    pocet_zeny text,
-    vek_prumer text,
-    vek_prumer_zeny text,
-    vek_prumer_muzi text
-);
-
-
-
-drop materialized view if exists mv_mista;
-create materialized view mv_mista as
- select obec, obec_kod, okres, okres_kod, kraj, kraj_kod, psc, latitude, longitude from is_mista;
- 
+); 

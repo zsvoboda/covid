@@ -1,8 +1,3 @@
-drop table if exists os_country;
-create table os_country(
-	country_id char(3) primary key,
-	country_name varchar(50)
-);
 
 drop table if exists os_county;
 create table os_county (
@@ -45,7 +40,6 @@ create index os_city_district_id_idx on os_city(district_id);
 create index os_demography_city_id_idx on os_demography(city_id);
 
 
-insert into os_country (country_id, country_name) values('CZ', 'Česká republika');
 insert into os_county(county_id, county_name)
 	select distinct kraj_kod, kraj from mv_mista;
 insert into os_district (district_id, county_id, district_name)
@@ -56,3 +50,23 @@ insert into os_demography (demography_id,
 	city_id, city_population, city_population_male, city_population_female, 
 	city_average_age, city_average_age_male, city_average_age_female)
 	select distinct obec_kod2, obec_kod2, pocet_obyvatel, pocet_muzi, pocet_zeny, vek_prumer, vek_prumer_zeny, vek_prumer_zeny from is_obyvatele;
+
+--VIEWS
+drop view if exists v_covid_by_district;	
+create view v_covid_by_district as
+	select distinct od.district_id, 
+		sum(oce.covid_event_cnt) filter (where oce.covid_event_type in ('I')) as district_infections, 
+		sum(oce.covid_event_cnt) filter (where oce.covid_event_type in ('R')) as district_recoveries,
+		sum(oce.covid_event_cnt) filter (where oce.covid_event_type in ('D')) as district_deaths
+		from os_district od 
+		join os_covid_event oce on oce.district_id = od.district_id 
+		group by 1;
+
+drop view if exists v_demography_by_district;
+create view v_demography_by_district as
+	select distinct od.district_id, 
+		sum(ode.city_population) as district_population
+		from os_district od 
+		join os_city oc on oc.district_id = od.district_id 
+		join os_demography ode on ode.city_id = oc.city_id 
+		group by 1;		
