@@ -90,13 +90,26 @@ cube(`CovidEvents`, {
   
   dimensions: {
     
+    covidEventPk: {
+      sql: `covid_event_id`,
+      type: `string`,
+      primaryKey: true
+    },
+    
     covidEventId: {
       sql: `covid_event_id`,
       type: `string`,
-      primaryKey: true,
-      shown: false
+      title: `Event ID`,
+      description: `Covid event ID.`
     },
-    
+
+    covidEventDistrictId: {
+      sql: `district_id`,
+      type: `string`,
+      title: `District ID`,
+      description: `District ID.`
+    },
+
     covidEventPersonGender: {
       sql: `covid_event_person_gender`,
       type: `string`,
@@ -104,11 +117,25 @@ cube(`CovidEvents`, {
       description: `Patient gender.`
     },
 
-    covidEventPersonAge: {
+    covidEventPersonAgePadded: {
       sql: `covid_event_person_age_padded`,
       type: `string`,
+      title: `Age Padded`,
+      description: `Patient age padded by zeroes to length 3.`
+    },
+
+    covidEventPersonAgeFact: {
+      sql: `covid_event_person_age`,
+      type: `number`,
       title: `Age`,
       description: `Patient age.`
+    },
+
+    covidEventCountFact: {
+      sql: `covid_event_cnt`,
+      type: `number`,
+      title: `Count`,
+      description: `Count for counting by SUM.`
     },
     
     covidEventDate: {

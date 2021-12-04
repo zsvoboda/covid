@@ -27,7 +27,7 @@ cube(`Districts`, {
     },
 
     districtPopulation: {
-      sql: `${population}`,
+      sql: `${populationFact}`,
       type: `sum`,
       drillMembers: [districtName],
       title: `District population`,
@@ -35,7 +35,7 @@ cube(`Districts`, {
     },
 
     districtMalePopulation: {
-      sql: `${malePopulation}`,
+      sql: `${malePopulationFact}`,
       type: `sum`,
       drillMembers: [districtName],
       title: `District male population`,
@@ -43,7 +43,7 @@ cube(`Districts`, {
     },
 
     districtFemalePopulation: {
-      sql: `${femalePopulation}`,
+      sql: `${femalePopulationFact}`,
       type: `sum`,
       drillMembers: [districtName],
       title: `District female population`,
@@ -54,14 +54,26 @@ cube(`Districts`, {
   
   dimensions: {
     
+    districtPk: {
+      sql: `district_id`,
+      type: `string`,
+      primaryKey: true
+    },
+    
     districtId: {
       sql: `district_id`,
       type: `string`,
-      primaryKey: true,
       title: `District code`,
       description: `District code`
     },
-    
+
+    districtCountyId: {
+      sql: `county_id`,
+      type: `string`,
+      title: `District county code`,
+      description: `District county code`
+    },
+
     districtName: {
       sql: `district_name`,
       type: `string`,
@@ -69,25 +81,22 @@ cube(`Districts`, {
       description: `District name`
     },
 
-    population: {
+    populationFact: {
       sql: `${Cities.cityPopulation}`,
       type: `number`,
-      subQuery: true,
-      shown: false
+      subQuery: true
     },
 
-    malePopulation: {
+    malePopulationFact: {
       sql: `${Cities.cityMalePopulation}`,
       type: `number`,
-      subQuery: true,
-      shown: false
+      subQuery: true
     },
 
-    femalePopulation: {
+    femalePopulationFact: {
       sql: `${Cities.cityFemalePopulation}`,
       type: `number`,
-      subQuery: true,
-      shown: false
+      subQuery: true
     }
     
   },

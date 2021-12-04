@@ -119,13 +119,118 @@ cube(`Hospitalisations`, {
   },
   
   dimensions: {
+    
+    hospitalizationPk: {
+      sql: `covid_hospitalisation_id`,
+      type: `number`,
+      primaryKey: true
+    },
+
     hospitalizationId: {
       sql: `covid_hospitalisation_id`,
       type: `number`,
-      primaryKey: true,
-      shown: false
+      title: `Hospitalisation ID`,
+      description: `Hospitalisation ID.`
     },
     
+    hospitalizationCountryId: {
+      sql: `country_id`,
+      type: `string`,
+      title: `Country ID`,
+      description: `Hospitalisation country ID.`
+    },
+
+    newlyHospitalisedFact: {
+      sql: `covid_hospitalisation_admissions`,
+      type: `number`,
+      title: `Newly hospitalised`,
+      description: `Number of newly hospitalised patients.`
+    },
+
+    hospitalisedFact: {
+      sql: `covid_hospitalisation_current`,
+      type: `number`,
+      title: `Hospitalized`,
+      description: `Number of currently hospitalised patients.`
+    },
+
+    noSymptompsFact: {
+      sql: `covid_hospitalisation_no_symptoms`,
+      type: `number`,
+      title: `No symptoms`,
+      description: `Number of currently hospitalised patients with no symptoms.`
+    },
+
+    lightSymptompsFact: {
+      sql: `covid_hospitalisation_light_symptoms`,
+      type: `number`,
+      title: `Light symptoms`,
+      description: `Number of currently hospitalised patients with light symptoms.`
+    },
+
+    mediumSymptompsFact: {
+      sql: `covid_hospitalisation_medium_symptoms`,
+      type: `number`,
+      title: `Medium symptoms`,
+      description: `Number of currently hospitalised patients with medium symptoms.`
+    },
+
+    severeSymptompsFact: {
+      sql: `covid_hospitalisation_severe_symptoms`,
+      type: `number`,
+      title: `Severe symptoms`,
+      description: `Number of currently hospitalised patients with severe symptoms.`
+    },
+
+    intensiveCareTreatmentFact: {
+      sql: `covid_hospitalisation_intensive_care`,
+      type: `number`,
+      title: `ICU`,
+      description: `Number of currently hospitalised patients on intensive care.`
+    },
+    
+    oxygenTreatmentFact: {
+      sql: `covid_hospitalisation_oxygen`,
+      type: `number`,
+      title: `Oxygen`,
+      description: `Number of currently hospitalised patients on oxygen treatment.`
+    },
+
+    hfnoTreatmentFact: {
+      sql: `covid_hospitalisation_hfno`,
+      type: `number`,
+      title: `HFNO`,
+      description: `Number of currently hospitalised patients on HFNO treatment.`
+    },
+
+    ventilationTreatmentFact: {
+      sql: `covid_hospitalisation_ventilation`,
+      type: `number`,
+      title: `Ventilation`,
+      description: `Number of currently hospitalised patients on ventilation treatment.`
+    },
+
+    ecmoTreatmentFact: {
+      sql: `covid_hospitalisation_ecmo`,
+      type: `number`,
+      title: `ECMO`,
+      description: `Number of currently hospitalised patients on ECMO treatment.`
+    },
+
+    ecmoVentilationTreatmentFact: {
+      sql: `covid_hospitalisation_ecmo_ventilation`,
+      type: `number`,
+      title: `ECMO & Ventilation`,
+      description: `Number of currently hospitalised patients on ECMO & ventilation treatment.`
+    },
+
+    hospitalizationDeathsFact: {
+      sql: `covid_hospitalisation_deaths`,
+      type: `number`,
+      title: `Died`,
+      description: `Number of currently hospitalised patients who died treatment.`
+    },
+
     covidHospitalisationDate: {
       sql: `covid_hospitalisation_date`,
       type: `time`,

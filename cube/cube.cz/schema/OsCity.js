@@ -1,20 +1,20 @@
 cube(`Cities`, {
   sql: `SELECT * FROM public.os_city`,
-  
+
   preAggregations: {
     // Pre-Aggregations definitions go here
     // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
   },
-  
+
   joins: {
     Demographies: {
       relationship: `hasMany`,
       sql: `${Cities}.city_id = ${Demographies}.city_id`
     }
   },
-  
+
   measures: {
-    
+
     count: {
       type: `count`,
       drillMembers: [cityName],
@@ -44,33 +44,41 @@ cube(`Cities`, {
     }
 
   },
-  
+
   dimensions: {
-    
+
+    cityPk: {
+      sql: `city_id`,
+      type: `string`,
+      primaryKey: true
+    },
+
     cityId: {
       sql: `city_id`,
       type: `string`,
-      primaryKey: true,
       title: `City code`,
       description: `City code`
     },
-    
+
     cityName: {
       sql: `city_name`,
       type: `string`,
       title: `City name`,
       description: `City name`
     },
-    
-    cityLatitude: {
-      sql: `city_latitude`,
+
+    cityGeo: {
       type: `geo`,
-      title: `City latitude`,
-      description: `City latitude`
+      latitude: {
+        sql: `city_latitude`,
+      },
+      longitude: {
+        sql: `city_longitude`,
+      }
     },
-    
+
     cityLongitude: {
-      sql: `city_longitude`,
+
       type: `geo`,
       title: `City longitude`,
       description: `City longitude`
@@ -96,8 +104,8 @@ cube(`Cities`, {
       subQuery: true,
       shown: false
     }
-    
+
   },
-  
+
   dataSource: `default`
 });

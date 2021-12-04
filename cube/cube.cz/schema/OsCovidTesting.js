@@ -31,13 +31,34 @@ cube(`Tests`, {
   },
   
   dimensions: {
+
+    covidTestingPk: {
+      sql: `covid_testing_id`,
+      type: `number`,
+      primaryKey: true
+    },
+
     covidTestingId: {
       sql: `covid_testing_id`,
       type: `number`,
-      primaryKey: true,
-      shown: false
+      title: `Testing ID`,
+      description: `Testing ID.`
     },
     
+    antigenFact: {
+      sql: `covid_testing_type_ag`,
+      type: `number`,
+      title: `Antigen`,
+      description: `Number of antigen tests.`
+    },
+
+    pcrFact: {
+      sql: `covid_testing_type_pcr`,
+      type: `number`,
+      title: `PCR`,
+      description: `Number of PCR tests.`
+    },
+
     covidTestingDate: {
       sql: `covid_testing_date`,
       type: `time`,

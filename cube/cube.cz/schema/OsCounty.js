@@ -50,14 +50,19 @@ cube(`Counties`, {
   
   dimensions: {
   
+    countyPk: {
+      sql: `county_id`,
+      type: `string`,
+      primaryKey: true
+    },
+    
     countyId: {
       sql: `county_id`,
       type: `string`,
-      primaryKey: true,
       title: `County code`,
       description: `County code`
     },
-    
+
     countyName: {
       sql: `county_name`,
       type: `string`,

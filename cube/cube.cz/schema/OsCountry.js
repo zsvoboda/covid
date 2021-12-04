@@ -54,10 +54,15 @@ cube(`Countries`, {
   
   dimensions: {
     
+    countryPk: {
+      sql: `country_id`,
+      type: `string`,
+      primaryKey: true
+    },
+
     countryId: {
       sql: `country_id`,
       type: `string`,
-      primaryKey: true,
       title: `Country code`,
       description: `Country code`
     },
