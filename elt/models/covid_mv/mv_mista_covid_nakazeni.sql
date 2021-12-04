@@ -6,4 +6,4 @@ select id,
 	okres_lau_kod,
 	nakaza_v_zahranici::integer,
 	nakaza_zeme_csu_kod,
-	reportovano_khs::integer from public.is_mista_covid_nakazeni
+	reportovano_khs::integer from dev.is_mista_covid_nakazeni

@@ -8,4 +8,4 @@ select
 	vek_prumer::decimal(5,2),
 	vek_prumer_zeny::decimal(5,2),
 	vek_prumer_muzi::decimal(5,2) 
-		from dev.is_demografie_2021
+		from public.is_demografie_2021

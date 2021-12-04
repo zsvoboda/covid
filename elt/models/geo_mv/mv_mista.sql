@@ -7,4 +7,4 @@ select obec,
         psc::text, 
         latitude::text, 
         longitude::text 
-    from public.is_mista
+    from dev.is_mista

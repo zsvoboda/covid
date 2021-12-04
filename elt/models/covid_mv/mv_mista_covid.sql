@@ -14,4 +14,4 @@ select
 	aktivni_pripady::integer,
 	nove_pripady_65::integer,
 	nove_pripady_7_dni::integer,
-	nove_pripady_14_dni::integer from public.is_mista_covid
+	nove_pripady_14_dni::integer from dev.is_mista_covid

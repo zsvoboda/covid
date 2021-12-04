@@ -407,7 +407,7 @@ create index os_demography_city_id_idx on os_demography(city_id);
 insert into os_demography (demography_id,
 	city_id, city_population, city_population_male, city_population_female, 
 	city_average_age, city_average_age_male, city_average_age_female)
-	select distinct obec_kod2, obec_kod2, pocet_obyvatel, pocet_muzi, pocet_zeny, vek_prumer, vek_prumer_zeny, vek_prumer_zeny from is_obyvatele;
+	select distinct obec_kod2, obec_kod2, pocet_obyvatel, pocet_muzi, pocet_zeny, vek_prumer, vek_prumer_muzi, vek_prumer_zeny from is_obyvatele;
 	
 */
 

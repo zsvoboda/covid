@@ -11,4 +11,4 @@ select id,
 	prevalence_75::integer,
 	aktualni_pocet_hospitalizovanych_osob::integer,
 	nove_hosp_7::integer,
-	testy_7::integer from public.is_mista_covid_orp
+	testy_7::integer from dev.is_mista_covid_orp

@@ -6,8 +6,8 @@
 
 -- COVID obce
 
-drop foreign table if exists is_mista_covid;
-create foreign table is_mista_covid
+drop foreign table if exists dev.is_mista_covid;
+create foreign table dev.is_mista_covid
 (
 	id text,
 	den text,
@@ -35,8 +35,8 @@ server covid_source_data options
 
 -- COVID kraj okres nakazeni vyleceni umrti
 
-drop foreign table if exists is_mista_covid_kumul;
-create foreign table is_mista_covid_kumul
+drop foreign table if exists dev.is_mista_covid_kumul;
+create foreign table dev.is_mista_covid_kumul
 (
 	id text,
 	datum text,
@@ -55,8 +55,8 @@ server covid_source_data options
 
 -- COVID orp (obce s rozsirenou pusobnosti)
 
-drop foreign table if exists is_mista_covid_orp;
-create foreign table is_mista_covid_orp
+drop foreign table if exists dev.is_mista_covid_orp;
+create foreign table dev.is_mista_covid_orp
 (
 	id text,
 	den text,
@@ -82,8 +82,8 @@ server covid_source_data options
 
 -- COVID hospitalizace
 
-drop foreign table if exists is_covid_hospitalizace;
-create foreign table is_covid_hospitalizace
+drop foreign table if exists dev.is_covid_hospitalizace;
+create foreign table dev.is_covid_hospitalizace
 (
 	id text,
 	datum text,
@@ -112,8 +112,8 @@ server covid_source_data options
 
 -- COVID nakazeni vyleceni umrti testy
 
-drop foreign table if exists is_covid;
-create foreign table is_covid
+drop foreign table if exists dev.is_covid;
+create foreign table dev.is_covid
 (
 	datum text,
 	kumulativni_pocet_nakazenych text,
@@ -137,8 +137,8 @@ server covid_source_data options
 
 -- COVID nakazeni osoby
 
-drop foreign table if exists is_mista_covid_nakazeni;
-create foreign table is_mista_covid_nakazeni
+drop foreign table if exists dev.is_mista_covid_nakazeni;
+create foreign table dev.is_mista_covid_nakazeni
 (
 	id text,
 	datum text,
@@ -159,8 +159,8 @@ server covid_source_data options
 
 -- COVID vyleceni osoby
 
-drop foreign table if exists is_mista_covid_vyleceni;
-create foreign table is_mista_covid_vyleceni
+drop foreign table if exists dev.is_mista_covid_vyleceni;
+create foreign table dev.is_mista_covid_vyleceni
 (
 	id text,
 	datum text,
@@ -178,8 +178,8 @@ server covid_source_data options
 
 -- COVID umrti osoby
 
-drop foreign table if exists is_mista_covid_umrti;
-create foreign table is_mista_covid_umrti
+drop foreign table if exists dev.is_mista_covid_umrti;
+create foreign table dev.is_mista_covid_umrti
 (
 	id text,
 	datum text,

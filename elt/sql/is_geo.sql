@@ -6,8 +6,8 @@
 
 -- Geografie
 
-drop foreign table if exists is_mista;
-create foreign table is_mista
+drop foreign table if exists dev.is_mista;
+create foreign table dev.is_mista
 (
 	obec text,
 	obec_kod text,
