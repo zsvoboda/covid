@@ -1,5 +1,5 @@
 cube(`CovidEvents`, {
-  sql: `SELECT * FROM public.os_covid_event`,
+  sql: `SELECT * FROM os_covid.os_covid_event`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here

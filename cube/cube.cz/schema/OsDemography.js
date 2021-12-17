@@ -1,5 +1,5 @@
 cube(`Demographies`, {
-  sql: `SELECT * FROM public.os_demography`,
+  sql: `SELECT * FROM os_covid.os_demography`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here

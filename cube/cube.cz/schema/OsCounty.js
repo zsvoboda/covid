@@ -1,5 +1,5 @@
 cube(`Counties`, {
-  sql: `SELECT * FROM public.os_county`,
+  sql: `SELECT * FROM os_covid.os_county`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here
