@@ -1,12 +1,9 @@
+drop extension if exists file_fdw cascade;
+create extension file_fdw;
 
+drop server if exists covid_source_data cascade;
+create server covid_source_data foreign data wrapper file_fdw;
 
---drop extension file_fdw;
---create extension file_fdw;
-
---drop server covid_source_data foreign data wrapper file_fdw;
---create server covid_source_data foreign data wrapper file_fdw;
-
-/*
 -- Geografie
 
 drop foreign table if exists is_mista;
@@ -33,8 +30,6 @@ drop materialized view if exists mv_mista;
 create materialized view mv_mista as
  select obec, obec_kod, okres, okres_kod, kraj, kraj_kod, psc, latitude, longitude from is_mista;
  
- */
-
 -- COVID obce
 
 drop materialized view if exists mv_mista_covid;
@@ -341,7 +336,6 @@ create materialized view mv_mista_covid_umrti as
 
 -- MODEL
 
-/*
 -- Geografie
 
 drop table if exists os_country;
@@ -408,9 +402,6 @@ insert into os_demography (demography_id,
 	city_id, city_population, city_population_male, city_population_female, 
 	city_average_age, city_average_age_male, city_average_age_female)
 	select distinct obec_kod2, obec_kod2, pocet_obyvatel, pocet_muzi, pocet_zeny, vek_prumer, vek_prumer_muzi, vek_prumer_zeny from is_obyvatele;
-	
-*/
-
 
 drop view if exists v_covid_by_district;
 drop view if exists v_demography_by_district;
@@ -528,62 +519,3 @@ create view v_demography_by_district as
 		join os_city oc on oc.district_id = od.district_id 
 		join os_demography ode on ode.city_id = oc.city_id 
 		group by 1;	
-
-
-
-/*
-select * from mv_mista mm;
-select * from mv_mista_covid mmc where orp_kod='7111';
-select * from os_county;
-select * from os_district;
-	
-select covid_hospitalisation_date, covid_hospitalisation_current,
-covid_hospitalisation_no_symptoms + covid_hospitalisation_light_symptoms + 
-covid_hospitalisation_medium_symptoms + covid_hospitalisation_severe_symptoms 
-	from os_covid_hospitalisation och
-	order by covid_hospitalisation_date desc;
-
-
-select covid_event_date, count(covid_event_id) 
-	from os_covid_event oce 
-	where covid_event_type = 'I'
-	group by 1
-	order by 1 desc;
-
-select datum, prirustkovy_pocet_provedenych_testu, prirustkovy_pocet_provedenych_ag_testu 
-	from mv_covid mc
-	order by datum desc; 
-
-select covid_event_date, count(covid_event_id) 
-	from os_covid_event oce 
-	where covid_event_type = 'D'
-	group by 1
-	order by 1 desc;
-
-select count(covid_event_id) 
-	from os_covid_event oce 
-	where covid_event_type = 'D';
-
-select * 
-	from mv_covid_hospitalizace mch
-	order by datum desc;
-	
-select city_id, city_name from os_city oc where city_id not in (select city_id from os_demography od);
-select city_id from os_demography oc where city_id not in (select city_id from os_city od);
-
-	
-select sum(city_population) from os_demography od 
-	
-select count(*) from os_covid_event oce;	
-		
-select * from v_demography_by_district;
-select * from v_covid_by_district;
-
-select 
-	oc.county_name, 100.0 * sum(district_deaths) / sum(district_infections)
-	from os_county oc 
-		join os_district od on od.county_id = oc.county_id 
-		join v_demography_by_district de on de.district_id = od.district_id 
-		join v_covid_by_district c on c.district_id = od.district_id
-	group by 1;
-*/
