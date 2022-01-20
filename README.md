@@ -1,63 +1,26 @@
-# Cube.js covid playground
+# GoodData and Cube.js COVID playground
+This project contains a simple COVID analytics implemented in GoodData and Cube.js. 
+There are two SQL scripts that create COVID database schema: one for US data and the other for Czech Republic data.
 
-```
-pg_dump --host=localhost --port=5432 --user=demouser --compress=9 --file=./data/backup/covid.dump --format=c --schema=public covid
+# Create initial Postgres DB
+```shell
 pg_restore --host=localhost --port=5432 --dbname=covid ./data/backup/covid.dump
-
-select  county, state, population, sum(population) over(partition by state), sum(population) over()
-  	from county;
-  	
-  select fips, date, cases, deaths, first_value(cases) over(partition by fips order by date desc), 
-  		first_value(deaths) over(partition by fips order by date desc)
-  	from cases_deaths_by_county cdbc order by fips, date; 
-  	
-  select fips, date, cases as cases_to_date, deaths as deaths_to_date, cases - lag(cases,1) over(partition by fips order by date) as cases_increment, 
-  		deaths - lag(deaths,1) over(partition by fips order by date) as deaths_increment
-  	from cases_deaths_by_county cdbc order by fips, date;
-
 ```
 
-host.docker.internal
+# Manual SQL ELT
+Execute `data/etl_us.sql` or `data/etl_cz.sql`.
 
+# DBT ETL 
+Optionally, you can execute the DBT ELT script. Review the `elt` directory.
 
-## Queries
+# Cube.js schema
+Review the `cube` directory.
 
-```
-{
-  "measures": [
-    "Districts.districtInfectionsPerPopulation",
-    "Districts.districtRecoveriesPerPopulation",
-    "Districts.districtDeathsPerPopulation",
-    "Districts.districtRecoveryRate",
-    "Districts.districtDeathRate"
-  ],
-  "timeDimensions": [],
-  "order": {
-    "Districts.districtInfectionsPerPopulation": "desc"
-  },
-  "filters": [],
-  "dimensions": [
-    "Counties.countyName"
-  ]
-}
+# GoodData.CN project
+Review the `gd` directory. Open the `gd/api/rest.http` in VScode with `REST API` extension installed and execute the API requests in the following sequence:
 
-```
-
-## GraphQL
-
-http://localhost:4000/cubejs-api/graphql
-
-```
-{
-  load {
-    counties {
-      state
-    }
-    casesDeathsByCounty {
-      week
-      deaths
-      cases
-    }
-  }
-}
-```
+1. `gd/api/db.json`
+2. `gd/api/pdm.json`
+3. `gd/api/workspace.json`
+4. `gd/api/ldm.json`
+5. `gd/api/analytics_model.json`
